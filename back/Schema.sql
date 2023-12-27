@@ -8,19 +8,19 @@ SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,N
 -- Schema mydb
 -- -----------------------------------------------------
 -- -----------------------------------------------------
--- Schema team2
+-- Schema team3
 -- -----------------------------------------------------
 
 -- -----------------------------------------------------
--- Schema team2
+-- Schema team3
 -- -----------------------------------------------------
-CREATE SCHEMA IF NOT EXISTS `team2` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci ;
-USE `team2` ;
+CREATE SCHEMA IF NOT EXISTS `team3` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci ;
+USE `team3` ;
 
 -- -----------------------------------------------------
--- Table `team2`.`user`
+-- Table `team3`.`user`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `team2`.`user` (
+CREATE TABLE IF NOT EXISTS `team3`.`user` (
   `UserID` INT NOT NULL AUTO_INCREMENT,
   `Password` VARCHAR(255) NULL DEFAULT NULL,
   `Email` VARCHAR(255) NULL DEFAULT NULL,
@@ -35,9 +35,9 @@ COLLATE = utf8mb4_0900_ai_ci;
 
 
 -- -----------------------------------------------------
--- Table `team2`.`cart`
+-- Table `team3`.`cart`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `team2`.`cart` (
+CREATE TABLE IF NOT EXISTS `team3`.`cart` (
   `CartID` INT NOT NULL AUTO_INCREMENT,
   `NameCart` VARCHAR(255) NULL DEFAULT NULL,
   `CartImage` LONGTEXT NULL DEFAULT NULL,
@@ -48,16 +48,16 @@ CREATE TABLE IF NOT EXISTS `team2`.`cart` (
   INDEX `fk_cart_user1_idx` (`user_UserID` ASC) VISIBLE,
   CONSTRAINT `fk_cart_user1`
     FOREIGN KEY (`user_UserID`)
-    REFERENCES `team2`.`user` (`UserID`))
+    REFERENCES `team3`.`user` (`UserID`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4
 COLLATE = utf8mb4_0900_ai_ci;
 
 
 -- -----------------------------------------------------
--- Table `team2`.`category`
+-- Table `team3`.`category`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `team2`.`category` (
+CREATE TABLE IF NOT EXISTS `team3`.`category` (
   `CategoryID` INT NOT NULL AUTO_INCREMENT,
   `NameCategory` VARCHAR(255) NULL DEFAULT NULL,
   `CategoryImage` LONGTEXT NULL DEFAULT NULL,
@@ -68,9 +68,9 @@ COLLATE = utf8mb4_0900_ai_ci;
 
 
 -- -----------------------------------------------------
--- Table `team2`.`product`
+-- Table `team3`.`product`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `team2`.`product` (
+CREATE TABLE IF NOT EXISTS `team3`.`product` (
   `ProductID` INT NOT NULL AUTO_INCREMENT,
   `Name` VARCHAR(255) NULL DEFAULT NULL,
   `Description` TEXT NULL DEFAULT NULL,
@@ -91,13 +91,13 @@ CREATE TABLE IF NOT EXISTS `team2`.`product` (
   INDEX `fk_product_cart1_idx` (`cart_CartID` ASC) VISIBLE,
   CONSTRAINT `fk_product_cart1`
     FOREIGN KEY (`cart_CartID`)
-    REFERENCES `team2`.`cart` (`CartID`),
+    REFERENCES `team3`.`cart` (`CartID`),
   CONSTRAINT `fk_product_category1`
     FOREIGN KEY (`CategoryID`)
-    REFERENCES `team2`.`category` (`CategoryID`),
+    REFERENCES `team3`.`category` (`CategoryID`),
   CONSTRAINT `fk_product_user1`
     FOREIGN KEY (`user_UserID`)
-    REFERENCES `team2`.`user` (`UserID`))
+    REFERENCES `team3`.`user` (`UserID`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4
 COLLATE = utf8mb4_0900_ai_ci;
