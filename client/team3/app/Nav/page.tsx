@@ -39,9 +39,9 @@ const Nav: React.FC = () => {
         <div className='flex justify-center gap-8 mt-11 mb-6'>
           <h1 className='absolute left-10 font-bold text-3xl mb-7'>ℰ-ℳ𝒶𝓁𝓁 🛒</h1>
   
-          <Link href='/home'>Home</Link>
-          <Link href='/contact'>Contact</Link>
-          <Link href='/AboutUs'>AboutUs</Link>
+          <Link href='../Home'>Home</Link>
+          <Link href='../Contact'>Contact</Link>
+          <Link href='../AboutUS'>AboutUs</Link>
           <Link href='/'><p style={{ marginRight: '5%' }}>Sign Up</p></Link>
      
           <div className='w-auto h-8 flex items-center gap-16 right-10'>
