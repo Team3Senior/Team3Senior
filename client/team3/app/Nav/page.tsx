@@ -36,15 +36,15 @@ const Nav: React.FC = () => {
             <option>English</option>
           </select>
         </div>
-        <div className='flex justify-center gap-8 mt-11 mb-6'>
-          <h1 className='absolute left-10 font-bold text-3xl mb-7'>ℰ-ℳ𝒶𝓁𝓁 🛒</h1>
+        <div className='flex justify-center gap-8 mt-11 mb-6 ml-20'>
+          <h1 className='absolute left-10 font-bold text-3xl mb-7 mr-36'>ℰ-ℳ𝒶𝓁𝓁 🛒</h1>
   
           <Link href='/home'>Home</Link>
           <Link href='/contact'>Contact</Link>
           <Link href='/AboutUs'>AboutUs</Link>
-          <Link href='/'><p style={{ marginRight: '5%' }}>Sign Up</p></Link>
+          <Link href='/'>Sign Up</Link>
      
-          <div className='w-auto h-8 flex items-center gap-16 right-10'>
+          <div className='w-auto h-8 flex items-center gap-16 right-10 ml-10'>
             <input
               onChange={(e) => setSearchValue(e.target.value)}
               type='search'
