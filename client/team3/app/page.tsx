@@ -1,9 +1,11 @@
 import Footer from "./Footer/page";
 import Home from "./Home/page";
+import Product from "./Product/page";
 export default function HomePage() {
   return (
     <main >
-      <Home/>
+     
+      <Product/>
       <Footer/>
     </main>
   )

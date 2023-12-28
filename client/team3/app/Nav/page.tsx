@@ -11,9 +11,9 @@ const Nav: React.FC = () => {
   const router = useRouter()
   console.log(router);
   
-  const [searchValue, setSearchValue] = useState('');
-  const [showAccount, setShowAccount] = useState(false);
-  const [counter, setCounter] = useState(0); // Assuming counter is used for items in the cart
+  const [searchValue, setSearchValue] = useState<String>('');
+  const [showAccount, setShowAccount] = useState<boolean>(false);
+  const [counter, setCounter] = useState<number>(0); 
 
   const handleSearch = () => {
     console.log('Search value:', searchValue);
@@ -25,7 +25,7 @@ const Nav: React.FC = () => {
   };
 
   return (
-    <div className='fixed w-full bg-white z-10'>
+    <div>
       <nav>
         <div className='flex items-center justify-center gap-2 h-16 bg-black text-white'>
           <h3 className='text-sm md:text-base'>
