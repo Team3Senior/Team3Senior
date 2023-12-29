@@ -1,10 +1,10 @@
-import React, { FC } from 'react';
-import  Button  from '../Button/page';
-import  PlaceboxInfo  from '../PlaceboxInfo/page';
-import { FaSquarePhone } from 'react-icons/fa6';
-import { GoMail } from 'react-icons/go';
-import Navbar from '../Nav/page';
-import Footer from '../Footer/page';
+import React, { FC } from "react";
+import Button from "../Button/page";
+import PlaceboxInfo from "../PlaceboxInfo/page";
+import { FaSquarePhone } from "react-icons/fa6";
+import { GoMail } from "react-icons/go";
+import Navbar from "../Nav/page";
+import Footer from "../Footer/page";
 
 const Contact: FC = () => {
   return (
@@ -22,7 +22,9 @@ const Contact: FC = () => {
                       <span className="text-black font-title-16px-regular [font-style:var(--title-16px-regular-font-style)] font-[number:var(--title-16px-regular-font-weight)] tracking-[var(--title-16px-regular-letter-spacing)] leading-[var(--title-16px-regular-line-height)] text-[length:var(--title-16px-regular-font-size)]">
                         <input type="text" placeholder="Your Name" />
                       </span>
-                      <span className="text-[#db4444] font-title-16px-regular [font-style:var(--title-16px-regular-font-style)] font-[number:var(--title-16px-regular-font-weight)] tracking-[var(--title-16px-regular-letter-spacing)] leading-[var(--title-16px-regular-line-height)] text-[length:var(--title-16px-regular-font-size)]">*</span>
+                      <span className="text-[#db4444] font-title-16px-regular [font-style:var(--title-16px-regular-font-style)] font-[number:var(--title-16px-regular-font-weight)] tracking-[var(--title-16px-regular-letter-spacing)] leading-[var(--title-16px-regular-line-height)] text-[length:var(--title-16px-regular-font-size)]">
+                        *
+                      </span>
                     </p>
                   </div>
                   <div className="relative w-[235px] h-[50px] bg-secondary rounded-[4px]">
@@ -30,7 +32,9 @@ const Contact: FC = () => {
                       <span className="text-black font-title-16px-regular [font-style:var(--title-16px-regular-font-style)] font-[number:var(--title-16px-regular-font-weight)] tracking-[var(--title-16px-regular-letter-spacing)] leading-[var(--title-16px-regular-line-height)] text-[length:var(--title-16px-regular-font-size)]">
                         <input type="text" placeholder="Your Email" />
                       </span>
-                      <span className="text-[#db4444] font-title-16px-regular [font-style:var(--title-16px-regular-font-style)] font-[number:var(--title-16px-regular-font-weight)] tracking-[var(--title-16px-regular-letter-spacing)] leading-[var(--title-16px-regular-line-height)] text-[length:var(--title-16px-regular-font-size)]">*</span>
+                      <span className="text-[#db4444] font-title-16px-regular [font-style:var(--title-16px-regular-font-style)] font-[number:var(--title-16px-regular-font-weight)] tracking-[var(--title-16px-regular-letter-spacing)] leading-[var(--title-16px-regular-line-height)] text-[length:var(--title-16px-regular-font-size)]">
+                        *
+                      </span>
                     </p>
                   </div>
                   <div className="relative w-[235px] h-[50px] bg-secondary rounded-[4px]">
@@ -38,12 +42,19 @@ const Contact: FC = () => {
                       <span className="text-black font-title-16px-regular [font-style:var(--title-16px-regular-font-style)] font-[number:var(--title-16px-regular-font-weight)] tracking-[var(--title-16px-regular-letter-spacing)] leading-[var(--title-16px-regular-line-height)] text-[length:var(--title-16px-regular-font-size)]">
                         <input type="text" placeholder="Phone Number" />
                       </span>
-                      <span className="text-[#db4444] font-title-16px-regular [font-style:var(--title-16px-regular-font-style)] font-[number:var(--title-16px-regular-font-weight)] tracking-[var(--title-16px-regular-letter-spacing)] leading-[var(--title-16px-regular-line-height)] text-[length:var(--title-16px-regular-font-size)]">*</span>
+                      <span className="text-[#db4444] font-title-16px-regular [font-style:var(--title-16px-regular-font-style)] font-[number:var(--title-16px-regular-font-weight)] tracking-[var(--title-16px-regular-letter-spacing)] leading-[var(--title-16px-regular-line-height)] text-[length:var(--title-16px-regular-font-size)]">
+                        *
+                      </span>
                     </p>
                   </div>
                 </div>
                 <PlaceboxInfo className="!h-[207px] !w-[737px]  " />
-                <Button button="primary" className="!flex-[0_0_auto] fill: #ef4444;" hover={false} text="Send Massage" />
+                <Button
+                  button="primary"
+                  className="!flex-[0_0_auto] fill: #ef4444;"
+                  hover={false}
+                  text="Send Massage"
+                />
               </div>
             </div>
           </div>
