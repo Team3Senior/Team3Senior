@@ -11,7 +11,7 @@ export default function Home() {
         {/* className="flex flex-col h-screen" */}
       <Nav/>
       </div>
-      <AdminCat/>
+      <ElementError/>
       
       </div>
     );
