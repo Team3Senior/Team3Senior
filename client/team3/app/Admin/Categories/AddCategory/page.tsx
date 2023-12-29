@@ -25,7 +25,6 @@ const AddCateg = () => {
         body: JSON.stringify(newCat),
       });
       
-      router.push('/adminCategories', { state: { refresh: ref } });
     } catch (err) {
       console.log(err);
     }
@@ -84,17 +83,18 @@ const AddCateg = () => {
           </div>
         </div>
         <h1 className='text-xl font-bold text-red mt-7'>Confirm :</h1>
-        <Link href='../../Categories/page.tsx'>
+        
           {' '}
           <button
             className='bg-black mt-5 h-11 w-52 text-white mb-10 shadow-md rounded'
             onClick={() => {
-              addCat({ NameCategory: catName, CategoryImage: url });
+              addCat({ NameCategory: catName, CategoryImage: url }); 
+              router.push('/Admin/Categories')
             }}
           >
             Join to Categories{' '}
           </button>
-        </Link>
+        
       </div>
 
       <Footer />
