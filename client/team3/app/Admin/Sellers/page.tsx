@@ -43,23 +43,6 @@ const Sellers = () => {
 
   return (
     <div>
-      <nav>
-        <div className="flex justify-center align-middle bg-black text-white h-20 gap-40 mb-6 items-center">
-          <Link href="/administration">Administration</Link>
-          <Link href="/adminClients">Clients</Link>
-          <Link href="/adminSellers">Sellers</Link>
-          <Link href="/adminCategories">Categories</Link>
-          <Link href="/adminProducts">Products</Link>
-          <div>
-            <input
-              type="search"
-              placeholder="What are you looking for?"
-              className="bg-gray-200 p-2 text-xs rounded w-56 h-9 right-36"
-            />
-            <IoSearchOutline size={25} className="absolute right-10 top-7" />
-          </div>
-        </div>
-      </nav>
       <div>
         <div className="grid grid-cols-3 mx-44 justify-center my-40 bg-white gap-40 items-center text-center rounded-s align-middle">
           {sels.map((el) => (

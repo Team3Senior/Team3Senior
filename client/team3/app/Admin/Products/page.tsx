@@ -59,23 +59,6 @@ const AdminProducts = () => {
 
   return (
     <div>
-      <nav>
-        <div className="flex justify-center align-middle bg-black text-white h-20 gap-40 mb-6 items-center">
-          <Link href="/admin">Administration</Link>
-          <Link href="/adminClients">Clients</Link>
-          <Link href="/adminSellers">Sellers</Link>
-          <Link href="/adminCategories">Categories</Link>
-          <Link href="/adminProducts">Products</Link>
-          <div>
-            <input
-              type="search"
-              placeholder="What are you looking for?"
-              className="bg-gray-200 p-2 text-xs rounded w-56 h-9 right-36"
-            />
-            <IoSearchOutline size={25} className="absolute right-10 top-7" />
-          </div>
-        </div>
-      </nav>
       <div className="flex grid grid-cols-3 gap-4 overflow-hidden shadow-2xl">
         {adminData.map((el) => (
           <div key={el.ProductID} className="">

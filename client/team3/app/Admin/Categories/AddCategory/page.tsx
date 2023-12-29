@@ -52,8 +52,8 @@ const AddCateg = () => {
   return (
     <div>
       <div className='flex justify-center align-middle bg-black text-white h-20 gap-40 mb-6 items-center'>
-        <Link href='/addCategory'>Add New Category</Link>
-        <Link href='/admin'>Get Back to Administration </Link>
+        <Link href='/Admin/Categories/AddCategory'>Add New Category</Link>
+        <Link href='/Admin'>Get Back to Administration </Link>
       </div>
 
       <div className='grid justify-center align-middle items-center box-border rounded-lg shadow-2xl border-black mt-30 gap-x-64 bg-gray-200 h-auto w-2/4 ml-96 '>

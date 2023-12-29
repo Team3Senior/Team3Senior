@@ -65,8 +65,8 @@ const AdminCat = () => {
     <div>
       <div>
         <div className="flex justify-center align-middle bg-black text-white h-20 gap-40 mb-6 items-center">
-          <Link href="/addCategory">Add New Category</Link>
-          <Link href="/admin">Get Back to Administration</Link>
+          <Link href="/Admin/Categories/AddCategory">Add New Category</Link>
+          <Link href="/Admin">Get Back to Administration</Link>
           <div>
             <input
               type="search"
