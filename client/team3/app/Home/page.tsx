@@ -1,6 +1,8 @@
 "use client"
+import AdminCat from "../Admin/AdminCategory/page";
 import Footer from "../Footer/page";
 import Nav from "../Nav/page";
+import { ElementError } from "../NotFound/page";
 import React, { useState, useEffect } from 'react';
 import { FaRegHeart } from "react-icons/fa";
 import { MdOutlineRemoveRedEye } from "react-icons/md";
