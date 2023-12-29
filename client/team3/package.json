@@ -9,23 +9,13 @@
     "lint": "next lint"
   },
   "dependencies": {
-<<<<<<< HEAD
     "axios": "^1.6.3",
-=======
-    "@emotion/react": "^11.11.3",
-    "@emotion/styled": "^11.11.0",
-    "@mui/material": "^5.15.2",
-    "@mui/styled-engine-sc": "^6.0.0-alpha.10",
->>>>>>> dc16bc154439eb32a6ff285f790c675bf16875f0
     "next": "14.0.4",
     "react": "^18",
     "react-dom": "^18",
     "react-icons": "^4.12.0",
-<<<<<<< HEAD
-    "react-router-dom": "^6.21.1"
-=======
-    "styled-components": "^6.1.6"
->>>>>>> dc16bc154439eb32a6ff285f790c675bf16875f0
+    "react-router-dom": "^6.21.1",
+    "react-stars": "^2.2.5"
   },
   "devDependencies": {
     "@types/node": "^20",

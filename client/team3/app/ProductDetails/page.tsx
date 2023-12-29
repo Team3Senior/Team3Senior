@@ -1,9 +1,9 @@
+"use client"
 import { useState } from "react";
 import { NextPage } from "next";
 import ReactStars from 'react-stars';
 import { CiSquarePlus, CiSquareMinus, TfiReload, CiDeliveryTruck } from "react-icons/all";
 import Navbar from "../Nav/page";
-import Footer from "../Footer/page";
 import { Product } from "../types"; // Replace Product with your actual type for the product
 
 type Props = {
@@ -115,7 +115,7 @@ const SingleProduct: NextPage<Props> = ({ obj, addCart }) => {
         </div>
       </div>
     </div>
-    <Footer/>
+   
     </>
   );
 };

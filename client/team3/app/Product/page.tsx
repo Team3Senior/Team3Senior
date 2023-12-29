@@ -1,5 +1,5 @@
 "use client"
-import Footer from "../Footer/page";
+
 import Nav from "../Nav/page";
 import React, { useState, useEffect } from 'react';
 import { FaRegHeart } from "react-icons/fa";
