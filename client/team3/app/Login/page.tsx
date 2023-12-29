@@ -11,9 +11,6 @@ export default function Login(){
     const [show,setShow ]=useState<boolean>(false)
     const [email,setEmail] = useState<string>('')
     const [password,setPassword] = useState<string>('')
-   
-    // const navigate=useNavigate()
-
 
 
     return (
@@ -47,14 +44,22 @@ export default function Login(){
                     </div>
                   </div>
                   <div className="flex-col items-start gap-[8px] flex-[0_0_auto] inline-flex relative">
-                    <div className="relative w-fit mt-[-1.00px] opacity-40 font-title-16px-regular font-[number:var(--title-16px-regular-font-weight)] text-text-2 text-[length:var(--title-16px-regular-font-size)] tracking-[var(--title-16px-regular-letter-spacing)] leading-[var(--title-16px-regular-line-height)] whitespace-nowrap [font-style:var(--title-16px-regular-font-style)]">
+                    <div className="relative w-fit mt-[-1.00px] opacity-40 font-title-16px-regular">
                       <input type="password" placeholder="Enter your password" className="w-96 h-9"
                       onChange={(event)=>{setPassword(event.target.value)}}/>
+                      <br/>
+                      <div>
+                      <div className=" w-fit font-title-16px-regular text-black">Forget Password?</div>
+                      
                     </div>
+                    
+                    </div>
+                    <div className=" w-fit font-title-16px-regular text-black">Don’t have an account yet? <a className="text-sm text-[#7747ff]" href="/">Sign up</a></div>
+
                   </div>
                 </div>
               </div>
-              {/* <div>
+              <div>
                     <button className="mt-[60px] bg-red-500 w-32 h-10 border rounded text-white text-sm" onClick={()=>setShow(!show)}>Select Type !</button>
                     {show&& <select className="  rounded  text-black " multiple >
                       
@@ -62,20 +67,23 @@ export default function Login(){
                       <option value="seller"onClick={()=>{setChType('seller')}}>Seller</option>
                       <option value="admin" onClick={()=>{setChType('admin')}} >Admin</option>
                     </select>}
-              </div> */}
+              </div>
               <div className="items-center gap-[87px] flex-[0_0_auto] inline-flex relative">
                 <div className="flex-col items-start gap-[16px] flex-[0_0_auto] inline-flex relative">
-                  <button onClick={()=>{<Link href="/home"></Link>}} className=" bg-red-500 w-32 h-10 border rounded text-white text-sm"> Log-In </button>
-                </div>
-                
-                <div className="relative w-fit font-title-16px-regular font-[number:var(--title-16px-regular-font-weight)] text-secondary-2 text-[length:var(--title-16px-regular-font-size)] tracking-[var(--title-16px-regular-letter-spacing)] leading-[var(--title-16px-regular-line-height)] whitespace-nowrap [font-style:var(--title-16px-regular-font-style)]">
-                  Forget Password?
+                  <button onClick={()=>{
+                    if(chType === 'client'){<Link href='/home'></Link>}
+                    else if(chType === 'seller'){<Link href='/sellerInterface'></Link>}
+                    else {<Link href='/admin'></Link>}
+
+                  }} className=" bg-red-500 w-32 h-10 border rounded text-white text-sm mr-1"> Log-In </button>
                 </div>
               </div>
             </div>
           </div>
-        <div className="text-sm text-center ml-[800px] mt-4">Don’t have an account yet? <a className="text-sm text-[#7747ff]" href="/">Sign up</a></div>
-  
+          <br/>
+   
+        
+        
         </div>
       </div>
       <Footer/>

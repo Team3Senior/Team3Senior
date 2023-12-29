@@ -5,6 +5,7 @@ const sequelize = new Sequelize(
   "team3",
   "root",
   "root",
+
   {
     host: "localhost",
     dialect: "mysql",
