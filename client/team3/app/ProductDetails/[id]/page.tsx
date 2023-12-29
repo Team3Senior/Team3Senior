@@ -1,25 +1,34 @@
 "use client"
-import { useState } from "react";
-import { NextPage } from "next";
-import ReactStars from 'react-stars';
-import { CiSquarePlus, CiSquareMinus, TfiReload, CiDeliveryTruck } from "react-icons/all";
-import Navbar from "../Nav/page";
-import { Product } from "../types"; // Replace Product with your actual type for the product
+import { useState } from 'react';
+// import { useSelector } from 'react-redux';
+import { useParams } from 'next/navigation';
+import Navbar from '../../Nav/page';
+// import { RootState } from '../../types'; 
+import Product from '@/app/Product/page';
 
-type Props = {
-  obj: Product; // Assuming `obj` is the product information
-  addCart: (product: Product) => void; // Assuming addCart function takes a product and returns void
-};
-
-const SingleProduct: NextPage<Props> = ({ obj, addCart }) => {
-  const [inp, setInp] = useState<number>(0); // State for product quantity
-  const [img, setImg] = useState<string>(obj.img[0]); // State for selected image
-
-  const ratingChanged = (newRating: number) => {
-    console.log(newRating);
-    // Handle rating change logic here if needed
+const SingleProduct: React.FC = () => {
+  const[inp,setInp]=useState(0)
+  const { productId } = useParams<{ productId: string }>();
+  // const [hover, setHover] = useState<boolean>(false);
+ const [product,setProduct]=useState({})
+  const[img,setImg]=useState(product.ProductImage[0])
+const id=parseInt(productId)
+  const fetchData = async () => {
+    try {
+      const response = await fetch(`http://localhost:3000/api/products/getOneProd/${id}`);
+      if (!response.ok) {
+        throw new Error('Error fetching all products');
+      }
+      const data = await response.json();
+      setProduct(data);
+      
+     
+    } catch (error) {
+      console.error(error);
+    }
   };
 
+  fetchData();
   return (
     <>
     <Navbar/>
@@ -30,22 +39,22 @@ const SingleProduct: NextPage<Props> = ({ obj, addCart }) => {
         </div>
         
         <div className="absolute w-[170px] h-[138px] top-[274px] left-[142px] bg-secondary rounded-[4px] overflow-hidden">
-          <img className="absolute w-[121px] h-[150px] -top-[10px]  left-[24px]" alt="Image" src={obj.img[1]} onMouseEnter={()=>setImg(obj.img[1])}/>
+          <img className="absolute w-[121px] h-[150px] -top-[10px]  left-[24px]" alt="Image" src={product.ProductImage[1]} onMouseEnter={()=>setImg(product.ProductImage[1])}/>
         </div>
         <div className="absolute w-[170px] h-[138px] top-[428px] left-[142px] bg-secondary rounded-[4px] overflow-hidden">
-          <img className="absolute w-[112px] h-[130px] -top-[10px] left-[29px]" alt="Image" src={obj.img[2]} onMouseEnter={()=>setImg(obj.img[2])} />
+          <img className="absolute w-[112px] h-[130px] -top-[10px] left-[29px]" alt="Image" src={product.ProductImage[2]} onMouseEnter={()=>setImg(product.ProductImage[2])} />
         </div>
         <div className="absolute w-[170px] h-[138px] top-[582px] left-[142px] bg-secondary rounded-[4px] overflow-hidden">
-          <img className="absolute w-[134px] h-[120px] top-[22px] left-[18px]" alt="Image" src={obj.img[3]} onMouseEnter={()=>setImg(obj.img[3])} />
+          <img className="absolute w-[134px] h-[120px] top-[22px] left-[18px]" alt="Image" src={product.ProductImage[3]} onMouseEnter={()=>setImg(product.ProductImage[3])} />
         </div>
         <div className="absolute w-[170px] h-[138px] top-[736px] left-[142px] bg-secondary rounded-[4px] overflow-hidden">
-          <img className="absolute w-[122px] h-[150px] -top-[16px] left-[24px]" alt="Image" src={obj.img[4]} onMouseEnter={()=>setImg(obj.img[4])} />
+          <img className="absolute w-[122px] h-[150px] -top-[16px] left-[24px]" alt="Image" src={product.ProductImage[4]} onMouseEnter={()=>setImg(product.ProductImage[4])} />
         </div>
         <div className="absolute top-[273px] left-[910px] font-heading-24px-semibold font-[number:var(--heading-24px-semibold-font-weight)] text-text-2 text-[length:var(--heading-24px-semibold-font-size)] tracking-[var(--heading-24px-semibold-letter-spacing)] leading-[var(--heading-24px-semibold-line-height)] whitespace-nowrap [font-style:var(--heading-24px-semibold-font-style)]">
-          {obj.name}
+          {product.name}
         </div>
         <div className="absolute top-[350px] left-[910px] font-heading-24px-regular font-[number:var(--heading-24px-regular-font-weight)] text-text-2 text-[length:var(--heading-24px-regular-font-size)] tracking-[var(--heading-24px-regular-letter-spacing)] leading-[var(--heading-24px-regular-line-height)] whitespace-nowrap [font-style:var(--heading-24px-regular-font-style)]">
-          {obj.price}
+          {product.price}
         </div>
         <div className="inline-flex items-start gap-[16px] absolute top-[314px] left-[910px]">
           <div className="inline-flex items-start gap-[8px] relative flex-[0_0_auto]">

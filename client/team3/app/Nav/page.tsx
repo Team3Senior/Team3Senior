@@ -25,7 +25,7 @@ const Nav: React.FC = () => {
   };
 
   return (
-    <div>
+    <div className='w-full bg-white z-10'>
       <nav>
         <div className='flex items-center justify-center gap-2 h-16 bg-black text-white'>
           <h3 className='text-sm md:text-base'>

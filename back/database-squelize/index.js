@@ -1,24 +1,21 @@
 
+
 const { Sequelize } = require('sequelize');
 
+// Create Sequelize instance
+const sequelize = new Sequelize(
+  "team3",
+  "root",
+  "54196048",
+  {
+    host: "localhost",
+    dialect: "mysql",
+  }
+);
+sequelize.authenticate().then(r=>console.log('connected')).catch(err => console.log(err))
 
-const sequelize = new Sequelize('team3', 'root', '54196048', {
-  host: 'localhost',
-  dialect: 'mysql', 
-});
+module.exports=sequelize
 
-sequelize.authenticate()
-  .then(() => {
-    console.log('Database connection has been established successfully.');
-  })
-  .catch((err) => {
-    console.error('Unable to connect to the database:', err);
-  });
-  sequelize.sync()
-  .then(() => {
-    console.log('Database and tables synchronized.');
-  })
-  .catch((error) => {
-    console.error('Error synchronizing the database:', error);
-  });
-module.exports = sequelize;
+
+
+
