@@ -7,7 +7,7 @@ import {useRouter} from 'next/navigation'
 import axios from 'axios'
 
 
-const EditProfile = (props:{login:{user:{FirstName:string}}}) => {
+const EditProfile   = (props:{login:{user:{FirstName:string}}}) => {
     const router=useRouter()
     const[fn,setFn]=useState<string>("")
     const[ln,setLn]=useState<string>("")
@@ -26,8 +26,8 @@ const updateUser:{}={
     adress:address,
     Email:email
 }
-      axios.put(`http://localost:3000/api/users/edit/${id}`,updateUser).then((result)=>{
-        console.log('user with id 1 updated successfully',result.data)
+      axios.put(`http://localhost:3000/api/users/edit/${id}`,updateUser).then((result)=>{
+        console.log(result.data)
       }).catch((error):any=>{
         console.log(error.message)
       })
@@ -104,7 +104,7 @@ const updateUser:{}={
                         </div>
                         <div className='mt-10' style={{'margin-left': '57%;'}}>
                         <button className='text-black  bg-white mr-8 ' onClick={()=>navigate('/')}>Cancel</button>
-                        <button className='text-white w-44 h-14 bg-black rounded' onClick={()=>update(3)}>Save Changes</button>
+                        <button className='text-white w-44 h-14 bg-black rounded' onClick={()=>update(1)}>Save Changes</button>
                         </div>
                 
                 </div>

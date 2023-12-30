@@ -66,7 +66,7 @@ const Nav: React.FC = () => {
               onClick={() => navigateTo('/cart')}
             />
             <CgProfile size={25} onClick={() => setShowAccount(!showAccount)} />
-            {/* {showAccount && <AccountDropDown />}  */}
+             {/*showAccount && <AccountDropDown />*/}  
           </div>
         </div>
       </nav>
