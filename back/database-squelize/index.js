@@ -8,12 +8,14 @@ const { Sequelize } = require('sequelize');
   "root",
   "root",
 
+
   {
     host: "localhost",
     dialect: "mysql",
   }
 );
 sequelize.authenticate().then(r=>console.log('connected')).catch(err => console.log(err))
+
 
 
 // Define relationships between models
@@ -36,6 +38,7 @@ sequelize.authenticate().then(r=>console.log('connected')).catch(err => console.
 // }).catch(err => {
 //   console.error('Error syncing database:', err);
 // });
+
 module.exports=sequelize
 
 

@@ -25,7 +25,7 @@ export default function Home() {
 if(logUser.data.Role === "admin") {
   push("/Admin")
 }
-else if(logUser.data.Role === "client") {
+ if(logUser.data.Role === "client") {
   push('/Home')
 }
       
