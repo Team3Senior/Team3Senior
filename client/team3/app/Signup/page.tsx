@@ -1,17 +1,17 @@
 import { getServerSession } from 'next-auth';
-import LoginForm from './loginForm';
+import SignupForm from './signupForm';
 import { redirect } from 'next/navigation';
 import Nav from "../Nav/page"
 
-export default async function Login() {
+export default async function Signup() {
   const session = await getServerSession();
   if (session) {
     redirect('/Home');
   }
   return(
-  <div>
-    <Nav/>
-<LoginForm/>
-  </div>
-  )
-}
+    <div>
+      <Nav/>
+  <SignupForm/>
+    </div>
+    )
+  }

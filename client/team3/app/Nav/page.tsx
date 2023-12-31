@@ -42,7 +42,7 @@ const Nav: React.FC = () => {
           <Link href='../Home'>Home</Link>
           <Link href='../Contact'>Contact</Link>
           <Link href='../AboutUS'>AboutUs</Link>
-          <Link href='/'><p style={{ marginRight: '5%' }}>Sign Up</p></Link>
+          <Link href='../Signup'><p style={{ marginRight: '5%' }}>Sign Up</p></Link>
      
           <div className='w-auto h-8 flex items-center gap-16 right-10 ml-10'>
             <input
