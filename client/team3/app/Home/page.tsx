@@ -4,6 +4,7 @@ import React,{useEffect,useState} from "react";
 import { FaArrowRight } from "react-icons/fa";
 import axios from 'axios'
 import Link from "next/link";
+import { useRouter } from 'next/navigation';
 import { FaRegHeart } from "react-icons/fa";
 import { AiOutlineShoppingCart } from "react-icons/ai";
 import { IoSearchOutline } from "react-icons/io5";
@@ -16,7 +17,8 @@ import { BsSmartwatch } from 'react-icons/bs';
 import { IoCameraOutline } from 'react-icons/io5';
 import { HiOutlineComputerDesktop } from 'react-icons/hi2';
 import { SiYoutubegaming } from 'react-icons/si';
- 
+import Image from 'next/image';
+import img from "../Image/high.png"
 const Home: React.FC = () => {
   const [products, setProducts] = useState<any[]>([]);
   const [showAddToCart, setShowAddToCart] = useState<boolean>(false);
@@ -25,7 +27,8 @@ const Home: React.FC = () => {
   const [flash, setFlash] = useState<any[]>([]);
   const [change, setChange] = useState(false);
   const [index1, setIndex1] = useState(1);
-
+  const [best,setBest]=useState([]);
+  const router = useRouter();
   useEffect(() => {
     axios.get(`http://localhost:3000/api/products/allProducts`)
       .then(r => {
@@ -36,12 +39,10 @@ const Home: React.FC = () => {
         });
         setFlash(d);
         setExp(r.data.slice(0, 8));
+        setBest(d.slice(2))
       })
       .catch(err => console.log(err));
   }, []);
-
-  const [e, setE] = useState<string>('');
-  const [showAcc, setShowAcc] = useState<boolean>(false);
 
   const addCart = (obj: object) => {
     axios.post("http://localhost:3000/api/cart/addCart", obj)
@@ -52,7 +53,10 @@ const Home: React.FC = () => {
   return(
     <>
 <Nav/>
-///
+
+
+
+
 <div>
 <hr className='text-gray-300'/>
 <hr className='text-gray-300'/>
@@ -85,7 +89,10 @@ const Home: React.FC = () => {
            </div>
            <hr id="hr-unique" className=' rotate-90 w-96 absolute top-16 text-gray-300'/>
            </div>
-////
+
+
+
+
 <div>
 <div className='ml-10'>
     <div className='mb-10'>
@@ -142,7 +149,10 @@ const Home: React.FC = () => {
       <hr className='w-5/6 ml-20 text-gray-300 mb-32'/>
     </div>
     </div>
-    /////
+ 
+
+
+
     <div>
     <div className="ml-10">
       <div className="mb-10">
@@ -216,11 +226,67 @@ const Home: React.FC = () => {
       <hr className="text-gray-300 w-5/6 mb-14" />
     </div>
     </div>
-    ///
 
-wael
 
-///
+
+
+
+<div>
+<div className="ml-10">
+      <div className="mb-10">
+        <div className="w-5 h-10 bg-red rounded"></div>
+        <h1 className="text-red absolute left-16 -mt-8 font-bold ">This Month</h1>
+        <div className="grid grid-cols-2 mb-20">
+          <h1 className="text-5xl font-medium mt-10">Best Selling Products</h1>
+          <button
+            onClick={() => {
+              router.push('/AllProducts');
+              setRefresh(!refresh);
+            }}
+            className="absolute right-60 mt-8 text-white bg-red w-32 h-12"
+          >
+            View All
+          </button>
+        </div>
+      </div>
+      <div className="flex gap-6">
+        {best.map((e, index) => (
+          <div key={index}>
+            <div className="w-80 h-72 bg-gray flex justify-center items-center mt-11">
+              <img src={e.ProductImage[0]?e.ProductImage[0]:e.ProductImage} alt="" width={160} height={160} />
+            </div>
+            <h1>{e.Name}</h1>
+            <div className="flex gap-4">
+              <h1 className="text-red">${e.Price}</h1>
+              <h1 className="text-gray-300 line-through">$360</h1>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <div
+        style={{
+          marginTop: '26%',
+          marginLeft: '19%',
+          width: '10%',
+          height: '7%',
+          backgroundColor: 'transparent',
+          cursor: 'pointer',
+        }}
+        className="absolute w-28 h-20 bg-gray"
+      ></div>
+      <br/><br/><br/>
+      <center>
+      <Image src={img} alt="" width={1200} height={1500} />
+      </center>
+    </div>
+
+</div>
+
+
+
+
+
 <div>
 <div>
         <div className='ml-10'>
@@ -249,7 +315,11 @@ wael
     </div>
     </div>
     </div>
-    ///
+
+
+
+
+
     <div>
     <div className='ml-80 grid grid-cols-3 '>
         <div>
