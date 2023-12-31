@@ -5,10 +5,11 @@ const Wish = sequelize.define('wish', {
       type: DataTypes.INTEGER,
       autoIncrement: true,
       primaryKey: true,
+      
     },
     NameWish: {
       type: DataTypes.STRING(255),
-      allowNull: true,
+      allowNull: false,
     },
     WishImage: {
       type: DataTypes.STRING(255),
@@ -16,7 +17,7 @@ const Wish = sequelize.define('wish', {
     },
     WishPrice:{
         type:DataTypes.INTEGER,
-        allowNull:true
+        allowNull:false
     },
     userUserID:{
         type:DataTypes.INTEGER,

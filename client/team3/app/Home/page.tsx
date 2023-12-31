@@ -52,7 +52,7 @@ const wished={
   WishPrice:product.Price,
  
 }
-axios.post("http://localhost:3000//api/wish/addwish/2",wished).then((result:any)=>{
+axios.post("http://localhost:3000/api/wish/addwish",wished).then((result:any)=>{
   console.log('added with success!',result.data)
 }).catch((error:any)=>{
   console.log(error)
@@ -80,7 +80,7 @@ return (
           <div className='bg-white w-12 h-12 rounded-full flex items-center justify-center float-right'><FaRegHeart onClick={()=>{addWish(All)}} size={20}/> </div>
           <div className='bg-white w-12 h-12 rounded-full flex items-center justify-center float-right'><MdOutlineRemoveRedEye size={20}/></div>
           {index===i&&showAddToCart&&<button style={{'margin-top': '214px'}} className='cursor-pointer w-80 h-11 bg-black text-white flex justify-center items-center absolute' onClick={()=>{addCart({NameCart:All.Name,CartImage:All.ProductImage,Price:All.Price,Quantity:All.Quantity,userUserID:2})}} >Add To Cart</button>}
-            <Link href={'/SingleProducts'}><img className=' w-40' src={All.ProductImage} alt="" /></Link>
+            <Link href={'/SingleProducts'}><img className=' w-40' src={All.ProductImage} alt="no-content" /></Link>
             
           </div>
           <h1>{All.Name}</h1>

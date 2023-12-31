@@ -2,9 +2,15 @@ const Wish = require('../Models/wishlist')
 module.exports={
     addwish:async(req,res)=>{
         
-        let {NameWish,WishPrice,userUserId}=req.body
-        let d=await Wish.create({NameWish,WishPrice,userUserId})    
+        let {NameWish,WishPrice,userUserID}=req.body
+        try{
+            let d=await Wish.create({NameWish,WishPrice,userUserID})    
         res.json(d)
+        }
+        catch(err){
+            console.log(err.message)
+        }
+        
     },
     getuserwishes:async(req,res)=>{
         try{
