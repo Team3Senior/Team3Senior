@@ -1,8 +1,8 @@
-"use client"
-import { useState, useEffect } from 'react';
-import { useRouter } from 'next/navigation';
-import Link from 'next/link';
-import Footer from '../../Footer/page'
+"use client";
+import { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
+import Link from "next/link";
+import Footer from "../../Footer/page";
 
 interface Category {
   CategoryID: number;
@@ -14,14 +14,16 @@ const AdminCat = () => {
   const [categs, setCategs] = useState<Category[]>([]);
   const [refresh, setRefresh] = useState<boolean>(false);
   const [show, setShow] = useState<number>(0);
-  const [name, setName] = useState<string>('');
+  const [name, setName] = useState<string>("");
   const router = useRouter();
 
-  console.log('name', name);
+  console.log("name", name);
 
   const fetchData = async () => {
     try {
-      const res = await fetch('http://localhost:3000/api/categories/allCategories');
+      const res = await fetch(
+        "http://localhost:3000/api/categories/allCategories"
+      );
       const data = await res.json();
       setCategs(data);
     } catch (err) {
@@ -36,7 +38,7 @@ const AdminCat = () => {
   const deleteCateg = async (id: number) => {
     try {
       await fetch(`http://localhost:3000/api/categories/deleteCategory/${id}`, {
-        method: 'DELETE',
+        method: "DELETE",
       });
       setRefresh(!refresh);
     } catch (err) {
@@ -47,9 +49,9 @@ const AdminCat = () => {
   const updateCateg = async (id: number, newdata: { NameCategory: string }) => {
     try {
       await fetch(`http://localhost:3000/api/categories/updateCategory/${id}`, {
-        method: 'PUT',
+        method: "PUT",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify(newdata),
       });
@@ -63,8 +65,8 @@ const AdminCat = () => {
     <div>
       <div>
         <div className="flex justify-center align-middle bg-black text-white h-20 gap-40 mb-6 items-center">
-          <Link href="/addCategory">Add New Category</Link>
-          <Link href="/admin">Get Back to Administration</Link>
+          <Link href="/Admin/Categories/AddCategory">Add New Category</Link>
+          <Link href="/Admin">Get Back to Administration</Link>
           <div>
             <input
               type="search"
@@ -73,10 +75,20 @@ const AdminCat = () => {
             />
           </div>
         </div>
-        <div className="flex justify-center my-40 bg-white gap-40 items-center text-center rounded-s align-middle" style={{ flexWrap: 'wrap' }}>
+        <div
+          className="flex justify-center my-40 bg-white gap-40 items-center text-center rounded-s align-middle"
+          style={{ flexWrap: "wrap" }}
+        >
           {categs.map((el) => (
-            <div key={el.CategoryID} className="flex-wrap grid-cols-5 mb-6 hover:box-content">
-              <img className="h-40 w-30 shadow-lg rounded-3xl" src={el.CategoryImage} alt="" />
+            <div
+              key={el.CategoryID}
+              className="flex-wrap grid-cols-5 mb-6 hover:box-content"
+            >
+              <img
+                className="h-40 w-30 shadow-lg rounded-3xl"
+                src={el.CategoryImage}
+                alt=""
+              />
               <h1 className="text-">{el.NameCategory}</h1>
               <button
                 className="bg-white hover:bg-red text-black rounded w-20 h-9 my-5"
@@ -124,8 +136,7 @@ const AdminCat = () => {
           ))}
         </div>
       </div>
-      <Footer/>
-
+      <Footer />
     </div>
   );
 };

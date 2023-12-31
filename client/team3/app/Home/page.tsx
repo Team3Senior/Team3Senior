@@ -9,12 +9,16 @@ import { FaRegHeart } from "react-icons/fa";
 import { MdOutlineRemoveRedEye } from "react-icons/md";
 import axios from "axios"
 import Link from 'next/link'; 
+
+
 const Product: React.FC = () => {
   const [All, setAll] = useState<any[]>([]);
   const [showAddToCart, setShowAddToCart] = useState<boolean>(false);
 const [index, setIndex] = useState<number>(-1);
 const [img,setImg] =useState('')
   const[name,setName] = useState('')
+
+  
 useEffect(() => {
     const fetchData = async () => {
       try {
@@ -68,7 +72,7 @@ return (
           <div className=' top-full left-0 w-20 rounded h-8 bg-red flex justify-center items-center text-white '>-{All.Discount}%</div>
           <div className='bg-white w-12 h-12 rounded-full flex items-center justify-center float-right'><FaRegHeart size={20}/> </div>
           <div className='bg-white w-12 h-12 rounded-full flex items-center justify-center float-right'><MdOutlineRemoveRedEye size={20}/></div>
-          {index===i&&showAddToCart&&<button style={{'margin-top': '214px'}} className='cursor-pointer w-80 h-11 bg-black text-white flex justify-center items-center absolute' onClick={()=>{addCart({NameCart:All.Name,CartImage:All.ProductImage,Price:All.Price,Quantity:All.Quantity,userUserID:1})}} >Add To Cart</button>}
+          {index===i&&showAddToCart&&<button style={{'margin-top': '214px'}} className='cursor-pointer w-80 h-11 bg-black text-white flex justify-center items-center absolute' onClick={()=>{addCart({NameCart:All.Name,CartImage:All.ProductImage,Price:All.Price,Quantity:All.Quantity,userUserID:2})}} >Add To Cart</button>}
             <Link href={'/SingleProducts'}><img className=' w-40' src={All.ProductImage} alt="" /></Link>
             
           </div>
