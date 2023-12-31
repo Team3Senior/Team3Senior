@@ -1,13 +1,16 @@
-import Footer from "./Footer/page";
-import Login from "./Login/page"
-
-import Nav from "./Nav/page"
+import Signup from "./Signup/page";
 export default function HomePage() {
+
+  // const userId = auth();
+
+  // if(userId){
+  //   redirect('/Home')
+  // }
+
   return (
     <main >
-      <Login />
+ <Signup/> 
     </main>
   )
 }
-
 

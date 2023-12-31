@@ -1,10 +1,10 @@
 const { Sequelize, DataTypes } = require('sequelize');
 
 // Create Sequelize instance
-const sequelize = new Sequelize(
-  "team3",
+ const sequelize = new Sequelize(
+  "team2",
   "root",
-  "53037912Aa*",
+  "farahkh",
 
   {
     host: "localhost",
@@ -29,7 +29,7 @@ sequelize.authenticate().then(r=>console.log('connected')).catch(err => console.
 // Product.belongsTo(User);
 
 // Sync the models with the database
-//execute one time and then comment this code (after Database and tables created!)
+// execute one time and then comment this code (after Database and tables created!)
 // sequelize.sync({ force: true }).then(() => {
 //   console.log('Database and tables created!');
 // }).catch(err => {

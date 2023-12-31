@@ -13,7 +13,7 @@ export default function AdminLayout({
         
         <div className='flex justify-center align-middle bg-black text-white h-20 gap-40 mb-6 items-center' >
          
-          <Link href='/' >Administration</Link>
+          <Link href='/Admin' >Administration</Link>
         <Link href='/Admin/Clients'>Clients</Link>
         <Link href='/Admin/Sellers'>Sellers</Link>
         <Link href='Admin/Categories'>Categories</Link>
