@@ -16,8 +16,8 @@ export default function AdminLayout({
           <Link href='/Admin' >Administration</Link>
         <Link href='/Admin/Clients'>Clients</Link>
         <Link href='/Admin/Sellers'>Sellers</Link>
-        <Link href='Admin/Categories'>Categories</Link>
-        <Link href='/AdminProducts'>Products</Link>
+        <Link href='/Admin/Categories'>Categories</Link>
+        <Link href='/Admin/Products'>Products</Link>
         <div>
         <input type="search"
             placeholder='What are you looking for?'

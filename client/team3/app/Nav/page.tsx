@@ -11,9 +11,9 @@ const Nav: React.FC = () => {
   const router = useRouter()
   console.log(router);
   
-  const [searchValue, setSearchValue] = useState('');
-  const [showAccount, setShowAccount] = useState(false);
-  const [counter, setCounter] = useState(0); // Assuming counter is used for items in the cart
+  const [searchValue, setSearchValue] = useState<String>('');
+  const [showAccount, setShowAccount] = useState<boolean>(false);
+  const [counter, setCounter] = useState<number>(0); 
 
   const handleSearch = () => {
     console.log('Search value:', searchValue);
