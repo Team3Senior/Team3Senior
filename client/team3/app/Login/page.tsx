@@ -1,5 +1,5 @@
 'use client'
-import Footer from "../Footer/page";
+
 import React, {useState} from "react";
 import Nav from "../Nav/page";
 import Link from "next/link"
@@ -86,7 +86,7 @@ export default function Login(){
         
         </div>
       </div>
-      <Footer/>
+  
       </div>
     );
   };

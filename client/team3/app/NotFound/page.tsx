@@ -24,7 +24,7 @@ export const ElementError: React.FC = () => {
           />
         </div>
       </div>
-      <Footer />
+
     </div>
   );
 };

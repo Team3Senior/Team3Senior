@@ -5,9 +5,6 @@ SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
 
 -- -----------------------------------------------------
--- Schema mydb
--- -----------------------------------------------------
--- -----------------------------------------------------
 -- Schema team3
 -- -----------------------------------------------------
 
@@ -58,6 +55,7 @@ CREATE TABLE IF NOT EXISTS `team3`.`carts` (
     ON DELETE SET NULL
     ON UPDATE CASCADE)
 ENGINE = InnoDB
+AUTO_INCREMENT = 3
 DEFAULT CHARACTER SET = utf8mb4
 COLLATE = utf8mb4_0900_ai_ci;
 
@@ -72,6 +70,22 @@ CREATE TABLE IF NOT EXISTS `team3`.`categories` (
   `createdAt` DATETIME NOT NULL,
   `updatedAt` DATETIME NOT NULL,
   PRIMARY KEY (`CategoryID`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci;
+
+
+-- -----------------------------------------------------
+-- Table `team3`.`contacts`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `team3`.`contacts` (
+  `userName` VARCHAR(225) NOT NULL,
+  `userEmail` VARCHAR(225) NOT NULL,
+  `userNumber` INT NOT NULL,
+  `userMessage` VARCHAR(225) NOT NULL,
+  `id` INT NULL AUTO_INCREMENT,
+  PRIMARY KEY (`id`),
+  UNIQUE INDEX `id_UNIQUE` (`id` ASC) VISIBLE)
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4
 COLLATE = utf8mb4_0900_ai_ci;
@@ -117,14 +131,34 @@ CREATE TABLE IF NOT EXISTS `team3`.`products` (
     ON DELETE SET NULL
     ON UPDATE CASCADE)
 ENGINE = InnoDB
+AUTO_INCREMENT = 6
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci;
+
+
+-- -----------------------------------------------------
+-- Table `team3`.`wishes`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `team3`.`wishes` (
+  `WishID` INT NOT NULL AUTO_INCREMENT,
+  `NameWish` VARCHAR(255) NULL DEFAULT NULL,
+  `WishImage` VARCHAR(255) NULL DEFAULT NULL,
+  `WishPrice` INT NULL DEFAULT NULL,
+  `userUserID` INT NULL DEFAULT NULL,
+  `createdAt` DATETIME NOT NULL,
+  `updatedAt` DATETIME NOT NULL,
+  PRIMARY KEY (`WishID`),
+  INDEX `userUserID` (`userUserID` ASC) VISIBLE,
+  CONSTRAINT `wishes_ibfk_1`
+    FOREIGN KEY (`userUserID`)
+    REFERENCES `team3`.`users` (`UserID`)
+    ON DELETE SET NULL
+    ON UPDATE CASCADE)
+ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4
 COLLATE = utf8mb4_0900_ai_ci;
 
 
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
-<<<<<<< HEAD
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
-=======
-SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
->>>>>>> 11674ff9919f0c292830e1668f155a3db3d7ca2e
