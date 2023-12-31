@@ -15,6 +15,7 @@ const Product: React.FC = () => {
 const [index, setIndex] = useState<number>(-1);
 const [img,setImg] =useState('')
   const[name,setName] = useState('')
+  const [counter, setCounter] = useState<number>(0); 
 useEffect(() => {
     const fetchData = async () => {
       try {
@@ -37,23 +38,33 @@ useEffect(() => {
 
   
   const addCart=(obj:object)=>{
+    setCounter(counter+1)
     axios.post("http://localhost:3000/api/cart/addCart",obj)
     .then((res)=>{console.log(res)})
     .catch((err)=>console.log(err))
+
   }
   
-  const addwish=(obj:object)=>{
-    axios.post('http://localhost:3000/api/wish/addwish',obj)
-    .then((res)=>console.log('addded')).catch(err=>console.log(err))
-  }
-
+  
+const addWish=(product:{Name:string,Price:number})=>{
+const wished={
+  NameWish:product.Name,
+  WishPrice:product.Price,
+ 
+}
+axios.post("http://localhost:3000//api/wish/addwish/2",wished).then((result:any)=>{
+  console.log('added with success!',result.data)
+}).catch((error:any)=>{
+  console.log(error)
+})
+}
 
 
 return (
     <>
 
     <div  className='mr-10 ml-10 mb-20 gap-7'>
-      <Nav/>
+      <Nav   />
           <h1 className='text-gray-300'>
           Home / <span className='text-black'> AllProducts</span>
         </h1>
@@ -66,9 +77,9 @@ return (
           onMouseLeave={()=>{setShowAddToCart(!showAddToCart)
           setIndex(-1)}}>
           <div className=' top-full left-0 w-20 rounded h-8 bg-red flex justify-center items-center text-white '>-{All.Discount}%</div>
-          <div className='bg-white w-12 h-12 rounded-full flex items-center justify-center float-right'><FaRegHeart size={20}/> </div>
+          <div className='bg-white w-12 h-12 rounded-full flex items-center justify-center float-right'><FaRegHeart onClick={()=>{addWish(All)}} size={20}/> </div>
           <div className='bg-white w-12 h-12 rounded-full flex items-center justify-center float-right'><MdOutlineRemoveRedEye size={20}/></div>
-          {index===i&&showAddToCart&&<button style={{'margin-top': '214px'}} className='cursor-pointer w-80 h-11 bg-black text-white flex justify-center items-center absolute' onClick={()=>{addCart({NameCart:All.Name,CartImage:All.ProductImage,Price:All.Price,Quantity:All.Quantity,userUserID:1})}} >Add To Cart</button>}
+          {index===i&&showAddToCart&&<button style={{'margin-top': '214px'}} className='cursor-pointer w-80 h-11 bg-black text-white flex justify-center items-center absolute' onClick={()=>{addCart({NameCart:All.Name,CartImage:All.ProductImage,Price:All.Price,Quantity:All.Quantity,userUserID:2})}} >Add To Cart</button>}
             <Link href={'/SingleProducts'}><img className=' w-40' src={All.ProductImage} alt="" /></Link>
             
           </div>

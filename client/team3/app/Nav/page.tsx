@@ -7,13 +7,13 @@ import { FaRegHeart } from 'react-icons/fa';
 import { AiOutlineShoppingCart } from 'react-icons/ai';
 import { CgProfile } from 'react-icons/cg';
 
-const Nav: React.FC = () => {
+const Nav: React.FC = (props:{}) => {
   const router = useRouter()
   console.log(router);
   
   const [searchValue, setSearchValue] = useState<String>('');
   const [showAccount, setShowAccount] = useState<boolean>(false);
-  const [counter, setCounter] = useState<number>(0); 
+  
 
   const handleSearch = () => {
     console.log('Search value:', searchValue);
@@ -56,14 +56,14 @@ const Nav: React.FC = () => {
               size={25}
               className='cursor-pointer'
             />
-            <FaRegHeart size={25} />
+            <FaRegHeart  onClick={() => navigateTo('/wishlist/2')}  size={25} />
             <div className='w-5 h-5 bg-red-500 rounded-full flex justify-center items-center text-white'>
-              {counter}
+             
             </div>
             <AiOutlineShoppingCart
               className='cursor-pointer'
               size={25}
-              onClick={() => navigateTo('/cart')}
+              onClick={() => navigateTo('/cart/2')}
             />
             <CgProfile size={25} onClick={() => setShowAccount(!showAccount)} />
              {/*showAccount && <AccountDropDown />*/}  

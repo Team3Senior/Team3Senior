@@ -20,7 +20,7 @@ const Wish = sequelize.define('wish', {
     },
     userUserID:{
         type:DataTypes.INTEGER,
-        allowNull:true
+        allowNull:false
       },
 
   });

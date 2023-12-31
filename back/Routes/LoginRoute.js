@@ -1,10 +1,10 @@
 // login
 const express = require('express');
 const router = express.Router();
-const AuthentController=require('../Controllers/AuthentController.js');
+const authController=require('../Controllers/AuthenticationLogin');
 
-router.post('/signup', AuthentController.Register);
-router.post('/login',AuthentController.Login)
+router.post('/signup', authController.signUpUser);
+router.post('/login',authController.login)
 
 
 

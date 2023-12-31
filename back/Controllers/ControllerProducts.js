@@ -1,5 +1,5 @@
 
-const Product=require('../models/product')
+const Product=require('../Models/product')
 const User=require('../Models/user')
 const Category=require("../Models/category")
 module.exports={

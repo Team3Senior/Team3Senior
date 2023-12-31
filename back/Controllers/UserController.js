@@ -32,9 +32,8 @@ module.exports={
     res.json(cl)
   },
   updateUser:async(req,res)=>{
-    
     const {FirstName,LastName,adress,Password,Email}=req.body
-    const hashed=await bcrypt.hash(Password)
+    const hashed=await bcrypt.hash(Password,10)
     if(hashed){
     let upd=await User.update({FirstName,LastName,Password:hashed,adress,Email,},{where:{UserID:req.params.id}})
     res.json(upd)}
