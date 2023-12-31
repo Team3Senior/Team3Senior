@@ -46,18 +46,21 @@ useEffect(() => {
   }
   
   
-const addWish=(product:{Name:string,Price:number})=>{
+const addWished=(product:{NameWish:string,Price:number})=>{
+  console.log('function addwish working')
 const wished={
-  NameWish:product.Name,
+  NameWish:product.NameWish,
   WishPrice:product.Price,
- 
+  userUserID:2
 }
-axios.post("http://localhost:3000/api/wish/addwish",wished).then((result:any)=>{
-  console.log('added with success!',result.data)
-}).catch((error:any)=>{
-  console.log(error)
+axios.post("http://localhost:3000/api/wish/addwish",wished).then((results:any)=>{
+  console.log(results.data)
+}).catch((err:any)=>{
+  console.log(err)
 })
 }
+
+
 
 
 return (
@@ -69,23 +72,23 @@ return (
           Home / <span className='text-black'> AllProducts</span>
         </h1>
       <div className='flex  gap-4 flex-wrap shadow-sm'>
-      {All.map((All,i)=>(
+      {All.map((all,i)=>(
         <div key={i} className=''>
           <div className='w-80 h-72 bg-gray mt-10 flex-wrap'
           onMouseEnter={()=>{setShowAddToCart(!showAddToCart)
             setIndex(i)}}
           onMouseLeave={()=>{setShowAddToCart(!showAddToCart)
           setIndex(-1)}}>
-          <div className=' top-full left-0 w-20 rounded h-8 bg-red flex justify-center items-center text-white '>-{All.Discount}%</div>
-          <div className='bg-white w-12 h-12 rounded-full flex items-center justify-center float-right'><FaRegHeart onClick={()=>{addWish(All)}} size={20}/> </div>
+          <div className=' top-full left-0 w-20 rounded h-8 bg-red flex justify-center items-center text-white '>-{all.Discount}%</div>
+          <div className='bg-white w-12 h-12 rounded-full flex items-center justify-center float-right'><FaRegHeart onClick={()=>{addWished(all)}} size={20}/> </div>
           <div className='bg-white w-12 h-12 rounded-full flex items-center justify-center float-right'><MdOutlineRemoveRedEye size={20}/></div>
-          {index===i&&showAddToCart&&<button style={{'margin-top': '214px'}} className='cursor-pointer w-80 h-11 bg-black text-white flex justify-center items-center absolute' onClick={()=>{addCart({NameCart:All.Name,CartImage:All.ProductImage,Price:All.Price,Quantity:All.Quantity,userUserID:2})}} >Add To Cart</button>}
-            <Link href={'/SingleProducts'}><img className=' w-40' src={All.ProductImage} alt="no-content" /></Link>
+          {index===i&&showAddToCart&&<button style={{'margin-top': '214px'}} className='cursor-pointer w-80 h-11 bg-black text-white flex justify-center items-center absolute' onClick={()=>{addCart({NameCart:all.Name,CartImage:all.ProductImage,Price:all.Price,Quantity:all.Quantity,userUserID:2})}} >Add To Cart</button>}
+            <Link href={'/SingleProducts'}><img className=' w-40' src={all.ProductImage} alt="no-content" /></Link>
             
           </div>
-          <h1>{All.Name}</h1>
+          <h1>{all.Name}</h1>
          <div className='flex gap-4'>
-         <h1 className='text-red'>${All.Price}</h1><h1 className='text-gray-300 line-through	'>{(All.Price / (1 - All.Discount/ 100)).toFixed(2)}</h1>
+         <h1 className='text-red'>${all.Price}</h1><h1 className='text-gray-300 line-through	'>{(all.Price / (1 - all.Discount/ 100)).toFixed(2)}</h1>
          </div>
         </div>
       ))}

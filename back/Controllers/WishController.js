@@ -18,8 +18,20 @@ module.exports={
         res.json(d)
     }
     catch(err){
-        res.status(400).json('err')
+        res.json('err')
     }
 },
-
+deleteWish:(req,res)=>{
+    
+   Wish.destroy({
+    where:{
+        WishID:req.body.id
+    }
+   }).then((data)=>{
+    res.json(data)
+   }).catch(err=>{res.json(err.message)})
+  
+    
+   
+}
 }

@@ -3,17 +3,32 @@ import React,{useState,useEffect} from 'react'
 import Navbar from '../../Nav/page'
 import Footer from '../../Footer/page'
 import axios from 'axios'
+import { MdDelete } from "react-icons/md";
 import { useParams } from 'next/navigation'
 const WishList = () => {
     const params=useParams<{iduser:string}>()
     const[wishes,setWishes]=useState([])
-    console.log(params.iduser);
+    const [refresh,setRefresh]=useState<boolean>(false)
+    
+   const deleteWish=(id:number)=>{
+    
+    const idproduct:{}={
+        id:id
+    }
+    axios.delete("http://localhost:3000/api/wish/delete",idproduct).then((result:any)=>{
+        console.log(result.data)
+    }).catch((err)=>{
+        console.log(err.message)
+    })
+    console.log("deletion done successfully!")
+    setRefresh(!refresh)
+   }
 useEffect(()=>{
-         axios.get(`http://localhost:3000/api/wish/getwishes/${parseInt(params.iduser)}`)
+         axios.get(`http://localhost:3000/api/wish/getwishes/2`)
         .then(r=>{
           console.log('wish',r.data)
           setWishes(r.data)}).catch(err=>console.log(err.message))
-      },[])
+      },[refresh])
   return (
     <div>
         <Navbar/>
@@ -33,7 +48,7 @@ useEffect(()=>{
      
         <h1>{e.NameWish}</h1>
         <h1>{e.WishPrice}$</h1>
-        <img className='w-20 mb-10 mr-10' src={e.WishImage} alt="" />
+        <MdDelete onClick={()=>{deleteWish(e.WishID)}} className='ml-10 cursor-pointer'  />
        
         </div>
 
