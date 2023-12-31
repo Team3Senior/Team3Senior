@@ -74,7 +74,7 @@ const AdminProducts = () => {
                 </button>
               </div>
 
-              <img className="w-40" src={el.ProductImage} alt="" />
+              <img className="w-40" src={el.ProductImage[0]} alt="" />
             </div>
 
             <h1>{el.Name}</h1>

@@ -4,8 +4,8 @@ import Product from "./Product/page";
 export default function HomePage() {
   return (
     <main >
-      <Product/>
-      {/* <Home /> */}
+     
+      <Home/>
     </main>
   )
 }

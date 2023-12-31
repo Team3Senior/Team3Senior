@@ -1,96 +1,99 @@
-
 "use client"
-
-import Footer from "../Footer/page";
-import Nav from "../Nav/page";
-import { ElementError } from "../NotFound/page";
-import React, { useState, useEffect } from 'react';
-import { FaRegHeart } from "react-icons/fa";
-import { MdOutlineRemoveRedEye } from "react-icons/md";
-import axios from "axios"
-import Link from 'next/link'; 
-
-
-const Product: React.FC = () => {
-  const [All, setAll] = useState<any[]>([]);
-  const [showAddToCart, setShowAddToCart] = useState<boolean>(false);
-const [index, setIndex] = useState<number>(-1);
-const [img,setImg] =useState('')
-  const[name,setName] = useState('')
-
-  
-useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch('http://localhost:3000/api/products/allProducts');
-        if (!response.ok) {
-          throw new Error('Error fetching all products');
-        }
-        const data = await response.json();
-        setAll(data);
-        
-       
-      } catch (error) {
-        console.error(error);
-      }
-    };
-
-    fetchData();
-  }, []);
+import React, { useState } from 'react';
+import { IoIosPhonePortrait } from 'react-icons/io';
+import { FaArrowLeft, FaArrowRight } from 'react-icons/fa';
+import { CiHeadphones } from 'react-icons/ci';
+import { BsSmartwatch } from 'react-icons/bs';
+import { IoCameraOutline } from 'react-icons/io5';
+import { HiOutlineComputerDesktop } from 'react-icons/hi2';
+import { SiYoutubegaming } from 'react-icons/si';
 
 
-  
-  const addCart=(obj:object)=>{
-    axios.post("http://localhost:3000/api/cart/addCart",obj)
-    .then((res)=>{console.log(res)})
-    .catch((err)=>console.log(err))
-  }
-  
-  const addwish=(obj:object)=>{
-    axios.post('http://localhost:3000/api/wish/addwish',obj)
-    .then((res)=>console.log('addded')).catch(err=>console.log(err))
-  }
+const BrowseCategory = ({ handlerFunction }: { handlerFunction: (category: string) => void }) => {
+ 
 
+  const [change, setChange] = useState(false);
+  const [index, setIndex] = useState(1);
 
-
-return (
-    <>
-
-    <div  className='mr-10 ml-10 mb-20 gap-7'>
-      <Nav/>
-          <h1 className='text-gray-300'>
-          Home / <span className='text-black'> AllProducts</span>
-        </h1>
-      <div className='flex  gap-4 flex-wrap shadow-sm'>
-      {All.map((All,i)=>(
-        <div key={i} className=''>
-          <div className='w-80 h-72 bg-gray mt-10 flex-wrap'
-          onMouseEnter={()=>{setShowAddToCart(!showAddToCart)
-            setIndex(i)}}
-          onMouseLeave={()=>{setShowAddToCart(!showAddToCart)
-          setIndex(-1)}}>
-          <div className=' top-full left-0 w-20 rounded h-8 bg-red flex justify-center items-center text-white '>-{All.Discount}%</div>
-          <div className='bg-white w-12 h-12 rounded-full flex items-center justify-center float-right'><FaRegHeart size={20}/> </div>
-          <div className='bg-white w-12 h-12 rounded-full flex items-center justify-center float-right'><MdOutlineRemoveRedEye size={20}/></div>
-          {index===i&&showAddToCart&&<button style={{'margin-top': '214px'}} className='cursor-pointer w-80 h-11 bg-black text-white flex justify-center items-center absolute' onClick={()=>{addCart({NameCart:All.Name,CartImage:All.ProductImage,Price:All.Price,Quantity:All.Quantity,userUserID:2})}} >Add To Cart</button>}
-            <Link href={'/SingleProducts'}><img className=' w-40' src={All.ProductImage} alt="" /></Link>
-            
-          </div>
-          <h1>{All.Name}</h1>
-         <div className='flex gap-4'>
-         <h1 className='text-red'>${All.Price}</h1><h1 className='text-gray-300 line-through	'>{(All.Price / (1 - All.Discount/ 100)).toFixed(2)}</h1>
-         </div>
-        </div>
-      ))}
-        
+  return (
+    <div className="ml-10">
+      <div className="mb-10">
+        <div className="w-5 h-10 bg-red rounded"></div>
+        <h1 className="text-red absolute left-16 -mt-8 font-bold">Categories</h1>
       </div>
-    
-<Footer/>
+      <h1 className="text-5xl font-medium mb-20">Browse By Category</h1>
+      <div
+        onClick={() => {
+          setChange(true);
+          setIndex(index - 1);
+        }}
+        style={{ top: '219%' }}
+        className="w-9 h-9 rounded-full bg-gray flex justify-center items-center absolute right-14"
+      >
+        <FaArrowLeft />
+      </div>
+      <div
+        onClick={() => {
+          setChange(true);
+          setIndex(index + 1);
+        }}
+        style={{ top: '219%' }}
+        className="w-9 h-9 rounded-full bg-gray flex justify-center items-center absolute right-0"
+      >
+        <FaArrowRight />
+      </div>
+
+      <div className="flex gap-6">
+        {['Phones', 'HeadPhones', 'SmartWatch', 'Camera', 'Computers', 'Gaming'].map((category, idx) => (
+          <div
+            key={idx}
+            tabIndex={idx}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter') {
+                handlerFunction(category);
+              }
+            }}
+            style={{ background: change && index === idx + 1 ? '#db4444' : 'white' }}
+            className="w-52 h-52 border border-gray-300 rounded flex justify-center items-center mb-20"
+            onClick={() => {
+              setChange(true);
+              setIndex(idx + 1);
+            }}
+          >
+            <div>
+              {(() => {
+                switch (category) {
+                  case 'Phones':
+                    return <IoIosPhonePortrait size={90} style={{ color: change && index === idx + 1 ? 'white' : 'black' }} />;
+                  case 'HeadPhones':
+                    return <CiHeadphones size={90} style={{ color: change && index === idx + 1 ? 'white' : 'black' }} />;
+                  case 'SmartWatch':
+                    return <BsSmartwatch size={90} style={{ color: change && index === idx + 1 ? 'white' : 'black' }} />;
+                  case 'Camera':
+                    return <IoCameraOutline size={90} style={{ color: change && index === idx + 1 ? 'white' : 'black' }} />;
+                  case 'Computers':
+                    return (
+                      <HiOutlineComputerDesktop size={90} style={{ color: change && index === idx + 1 ? 'white' : 'black' }} />
+                    );
+                  case 'Gaming':
+                    return <SiYoutubegaming size={90} style={{ color: change && index === idx + 1 ? 'white' : 'black' }} />;
+                  default:
+                    return null;
+                }
+              })()}
+              <h1 className="ml-5" style={{ color: change && index === idx + 1 ? 'white' : 'black' }}>
+                {category}
+              </h1>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <hr className="text-gray-300 w-5/6 mb-14" />
     </div>
+  );
+};
 
-    </>
-  )
-}
+export default BrowseCategory;
 
-export default Product;
 
