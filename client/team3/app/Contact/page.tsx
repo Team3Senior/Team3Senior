@@ -7,6 +7,7 @@ import Navbar from "../Nav/page";
 import Footer from "../Footer/page";
 
 const Contact: FC = () => {
+
   return (
     <>
       <div>

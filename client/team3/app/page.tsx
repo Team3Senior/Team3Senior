@@ -5,6 +5,7 @@ export default function HomePage() {
   return (
     <main >
       <Product/>
+      {/* <Home /> */}
     </main>
   )
 }
