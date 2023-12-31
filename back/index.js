@@ -5,6 +5,7 @@ const CartRouter=require('./Routes/RoutesCart');
 const authRoutes=require('./Routes/LoginRoute.js')
 const wish=require('./Routes/WishRoute.js')
 const app = express();
+const ContactRouter=require('./Routes/ContactRoute.js')
 const userRouter = require('./Routes/UserRoute.js')
 const categRouter = require('./Routes/CategoryRoute.js')
 const prodRouter = require('./Routes/RoutsProducts.js')
@@ -17,6 +18,7 @@ app.use('/auth', authRoutes);
 // app.use(bodyParser.json());
 // app.use(bodyParser.urlencoded({extended: true}));
 app.use('/api/cart',CartRouter)
+app.use('/api',ContactRouter)
  app.use('/api/products',prodRouter)
  app.use('/api/users',userRouter)
  app.use('/api/categories',categRouter)

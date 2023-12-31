@@ -1,3 +1,4 @@
+"use client"
 import React, { FC } from 'react';
 import  Button  from '../Button/page';
 import  PlaceboxInfo  from '../PlaceboxInfo/page';
@@ -7,6 +8,7 @@ import Navbar from '../Nav/page';
 import Footer from '../Footer/page';
 
 const Contact: FC = () => {
+
   return (
     <>
       <div>
