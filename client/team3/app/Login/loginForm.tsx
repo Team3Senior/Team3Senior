@@ -42,7 +42,7 @@ if(logUser.data.Role === "admin") {
   return (
      <div className='bg-white grid grid-cols-2 gap-96 w-full' >
      <div>  <img
-                className="absolute w-[805px] h-[706px] top-[75px] left-0"
+                className="absolute w-[805px] h-[706px] top-[270px] left-0"
                 alt="Dl beatsnoop"
                 src="https://i.imgur.com/nxyvDFz.png"
               /></div>
