@@ -1,7 +1,7 @@
 import React from "react";
 import Button from "../Button/page";
 import Navbar from "../Nav/page";
-import Footer from "../Footer/page";
+
 import "./NotFound.css"
 
 export const ElementError: React.FC = () => {
@@ -26,7 +26,7 @@ export const ElementError: React.FC = () => {
           />
         </div>
       </div>
-      <Footer />
+
     </div>
   );
 };

@@ -1,20 +1,15 @@
-
 "use client"
-
-import Footer from "../Footer/page";
 import Nav from "../Nav/page";
-import { ElementError } from "../NotFound/page";
 import React, { useState, useEffect } from 'react';
 import { FaRegHeart } from "react-icons/fa";
 import { MdOutlineRemoveRedEye } from "react-icons/md";
 import axios from "axios"
 import Link from 'next/link'; 
+import { log } from "console";
 const Product: React.FC = () => {
   const [All, setAll] = useState<any[]>([]);
   const [showAddToCart, setShowAddToCart] = useState<boolean>(false);
 const [index, setIndex] = useState<number>(-1);
-const [img,setImg] =useState('')
-  const[name,setName] = useState('')
 useEffect(() => {
     const fetchData = async () => {
       try {
@@ -24,18 +19,14 @@ useEffect(() => {
         }
         const data = await response.json();
         setAll(data);
-        
-       
+      
       } catch (error) {
         console.error(error);
       }
     };
-
     fetchData();
   }, []);
-
-
-  
+ 
   const addCart=(obj:object)=>{
     axios.post("http://localhost:3000/api/cart/addCart",obj)
     .then((res)=>{console.log(res)})
@@ -47,8 +38,7 @@ useEffect(() => {
     .then((res)=>console.log('addded')).catch(err=>console.log(err))
   }
 
-
-
+console.log(All);
 return (
     <>
 
@@ -69,7 +59,8 @@ return (
           <div className='bg-white w-12 h-12 rounded-full flex items-center justify-center float-right'><FaRegHeart size={20}/> </div>
           <div className='bg-white w-12 h-12 rounded-full flex items-center justify-center float-right'><MdOutlineRemoveRedEye size={20}/></div>
           {index===i&&showAddToCart&&<button style={{'margin-top': '214px'}} className='cursor-pointer w-80 h-11 bg-black text-white flex justify-center items-center absolute' onClick={()=>{addCart({NameCart:All.Name,CartImage:All.ProductImage,Price:All.Price,Quantity:All.Quantity,userUserID:1})}} >Add To Cart</button>}
-            <Link href={'/SingleProducts'}><img className=' w-40' src={All.ProductImage} alt="" /></Link>
+          <Link href={`/ProductDetails/${All.ProductID}`} ><img className=' w-40' src={All.ProductImage[0]?All.ProductImage[0]:All.ProductImage} alt="" onClick={()=>{
+            }} /></Link>
             
           </div>
           <h1>{All.Name}</h1>
@@ -81,7 +72,7 @@ return (
         
       </div>
     
-<Footer/>
+
     </div>
 
     </>
@@ -89,4 +80,3 @@ return (
 }
 
 export default Product;
-

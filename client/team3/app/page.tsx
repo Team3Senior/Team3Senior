@@ -1,11 +1,10 @@
-import Footer from "./Footer/page";
-import Login from "./Login/page"
 
-import Nav from "./Nav/page"
+import Home from "./Home/page";
+import Product from "./Product/page";
 export default function HomePage() {
   return (
     <main >
-      <Login />
+      <Product/>
     </main>
   )
 }
