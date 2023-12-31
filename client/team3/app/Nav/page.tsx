@@ -11,9 +11,9 @@ const Nav: React.FC = () => {
   const router = useRouter()
   console.log(router);
   
-  const [searchValue, setSearchValue] = useState('');
-  const [showAccount, setShowAccount] = useState(false);
-  const [counter, setCounter] = useState(0); // Assuming counter is used for items in the cart
+  const [searchValue, setSearchValue] = useState<String>('');
+  const [showAccount, setShowAccount] = useState<boolean>(false);
+  const [counter, setCounter] = useState<number>(0); 
 
   const handleSearch = () => {
     console.log('Search value:', searchValue);
@@ -25,7 +25,7 @@ const Nav: React.FC = () => {
   };
 
   return (
-    <div className='fixed w-full bg-white z-10'>
+    <div className='w-full bg-white z-10'>
       <nav>
         <div className='flex items-center justify-center gap-2 h-16 bg-black text-white'>
           <h3 className='text-sm md:text-base'>
@@ -39,10 +39,10 @@ const Nav: React.FC = () => {
         <div className='flex justify-center gap-8 mt-11 mb-6 ml-20'>
           <h1 className='absolute left-10 font-bold text-3xl mb-7 mr-36'>ℰ-ℳ𝒶𝓁𝓁 🛒</h1>
   
-          <Link href='/home'>Home</Link>
-          <Link href='/contact'>Contact</Link>
-          <Link href='/AboutUs'>AboutUs</Link>
-          <Link href='/'>Sign Up</Link>
+          <Link href='../Home'>Home</Link>
+          <Link href='../Contact'>Contact</Link>
+          <Link href='../AboutUS'>AboutUs</Link>
+          <Link href='../Signup'><p style={{ marginRight: '5%' }}>Sign Up</p></Link>
      
           <div className='w-auto h-8 flex items-center gap-16 right-10 ml-10'>
             <input

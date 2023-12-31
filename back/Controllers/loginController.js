@@ -1,32 +1,13 @@
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 const User = require('../Models/user');
-// const secretKey = 'my_secret_key_2023$#@!';
-const {addUser} = require('./UserController.js');
 
 
-const generateToken = (UserID, FirstName,LastName) => {
+const generateToken = (UserID,Role) => {
     const expiresIn = 60 * 60 * 48;//2days
-    return jwt.sign({ UserID, FirstName,LastName}, 'secretKey', { expiresIn: expiresIn });
+    return jwt.sign({ UserID, Role}, 'secretKey', { expiresIn: expiresIn });
   };
-  const Register = async (req, res) => {
-    const { FirstName,LastName, Email, Password ,Role } = req.body;
-  
-    try {
-      const hashedPassword = await bcrypt.hash(Password, 10);
-  
-      const newUser = {
-        FirstName,
-        LastName,
-        Email,
-        Role,
-        Password: hashedPassword}
-       
-       addUser({ body: newUser }, res);
-    } catch (error) {
-      res.status(500).json({ error: 'Error' });
-    }
-  };
+
   
   
   const Login = async(req, res) => {
@@ -37,6 +18,12 @@ const generateToken = (UserID, FirstName,LastName) => {
            else {
             const verif=result.dataValues.Password
             const passwordMatch = await bcrypt.compare(Password,verif)
+// console.log("verif",verif)
+// console.log("pw",Password)
+// console.log("result",result)
+// console.log("passmatch", passwordMatch)
+
+
             if(passwordMatch){
                const token=generateToken(result.dataValues.UserID, result.dataValues.FirstName, result.dataValues.LastName, result.dataValues.Role)  
                result.dataValues.token=token
@@ -53,7 +40,6 @@ const generateToken = (UserID, FirstName,LastName) => {
   };
   
   module.exports = {
-    Register,
-    Login,
+    Login
   };
 

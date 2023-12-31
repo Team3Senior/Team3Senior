@@ -1,18 +1,25 @@
-const { Sequelize, DataTypes } = require('sequelize');
+
+
+const { Sequelize } = require('sequelize');
 
 // Create Sequelize instance
-const sequelize = new Sequelize(
+ const sequelize = new Sequelize(
   "team2",
   "root",
+<<<<<<< HEAD
   "farahkh",
+=======
+  "root",
+>>>>>>> 59a2934361bd656466705c5bcda9d4102941a000
+
   {
     host: "localhost",
     dialect: "mysql",
   }
 );
 sequelize.authenticate().then(r=>console.log('connected')).catch(err => console.log(err))
-// Define User model
 
+<<<<<<< HEAD
 
 // Define relationships between models
 // User.hasMany(Cart);
@@ -28,12 +35,14 @@ sequelize.authenticate().then(r=>console.log('connected')).catch(err => console.
 // Product.belongsTo(User);
 
 // Sync the models with the database
-//execute one time and then comment this code (after Database and tables created!)
+// execute one time and then comment this code (after Database and tables created!)
 // sequelize.sync({ force: true }).then(() => {
 //   console.log('Database and tables created!');
 // }).catch(err => {
 //   console.error('Error syncing database:', err);
 // });
+=======
+>>>>>>> 59a2934361bd656466705c5bcda9d4102941a000
 module.exports=sequelize
 
 
