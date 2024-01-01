@@ -1,12 +1,44 @@
-import React, { FC } from "react";
+"use client"
+import React, { FC,useState, useEffect } from "react";
 import Button from "../Button/page";
 import PlaceboxInfo from "../PlaceboxInfo/page";
 import { FaSquarePhone } from "react-icons/fa6";
 import { GoMail } from "react-icons/go";
+import { useRouter } from "next/navigation";
 import Navbar from "../Nav/page";
 import Footer from "../Footer/page";
 
+interface Category {
+  userName: string;
+  userEmail: string;
+  userNumber: string;
+  userMessage:string;
+}
+
+
 const Contact: FC = () => {
+  const [categs, setCategs] = useState<Category[]>([]);
+  const [refresh, setRefresh] = useState<boolean>(false);
+  const [show, setShow] = useState<number>(0);
+  const [name, setName] = useState<string>("");
+  const router = useRouter();
+
+  const updateCateg = async (id: number, newdata: { userMessage:string; }) => {
+    try {
+      await fetch(`http://localhost:3000/api/addContact`, {
+        method: "post",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(newdata),
+      });
+      setRefresh(!refresh);
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+
 
   return (
     <>
