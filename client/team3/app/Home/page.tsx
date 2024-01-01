@@ -6,8 +6,8 @@ import axios from 'axios'
 import Link from "next/link";
 import { useRouter } from 'next/navigation';
 import { FaRegHeart } from "react-icons/fa";
-import { AiOutlineShoppingCart } from "react-icons/ai";
-import { IoSearchOutline } from "react-icons/io5";
+//import { AiOutlineShoppingCart } from "react-icons/ai";
+//import { IoSearchOutline } from "react-icons/io5";
 import { CgProfile } from "react-icons/cg";
 import { FaArrowLeft } from "react-icons/fa";
 import { MdOutlineRemoveRedEye } from "react-icons/md";
@@ -63,10 +63,6 @@ axios.post("http://localhost:3000/api/wish/addwish",toWishlist).then((result)=>{
   return(
     <>
 <Nav/>
-
-
-
-
 <div>
 <hr className='text-gray-300'/>
 <hr className='text-gray-300'/>
