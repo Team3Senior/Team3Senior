@@ -3,7 +3,10 @@
 import Link from "next/link";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import Footer from "../Footer/page";
+
+import cookie from 'js-cookie'
+
+
 
 export default function RegisterForm() {
 
@@ -16,13 +19,76 @@ export default function RegisterForm() {
 
   const router = useRouter();
 
-  const handleSubmit = async (e :  React.FormEvent<HTMLFormElement>) => {
+
+  
+
+  const handleSubmit = async (e :  React.FormEvent<HTMLFormElement> ) => {
     e.preventDefault();
 
     if (!firstName ||!lastName ||!role || !email || !password) {
       setError("All fields are necessary.");
       return;
     }
+
+    const validateEmail = function(address : string){
+      let notValidChar = ["/",";",",","*","<",">","?","§","!","%","$"]
+      let count =0
+      
+     if(address.length<4 || (!address.includes("@"))){
+      setError("Email not valid")
+      alert("length not valid. Please Try again")
+      return false;
+    }
+
+     for(let i=1; i<address.length-2;i++){
+     if( address[i]==="@"){count++}
+     if(notValidChar.includes(address[i])){
+      console.log(address[i])
+      setError("Email not valid")
+      alert("Should only contain characters,numbers, dot or dash. Please Try again")
+      return false;
+    }
+    
+      }
+    if(count>1 || count===0){
+      setError("Email not valid")
+      alert("should not contain more than one @ and it shouldn't be in the limits of your email.  Please Try again")
+      return false; 
+    }
+    
+     
+     for(let k=address.indexOf("@"); k<address.length; k++){
+      if(!address.includes(".")){
+        setError("Email not valid")
+        alert("Should contain a dot in the second part.  Please Try again")
+        return false;
+      }
+   
+     }
+    
+    if(address[address.length-1]==="." || address[0]==="." ){
+   
+      setError("Email not valid")
+      alert("You shouldn't put dot in the start or in last of the email.  Please Try again")
+
+      return false; 
+    }
+    
+    if( address[address.indexOf("@")+1]==="." || address[address.indexOf("@")-1]==="."){
+      setError("Email not valid")
+      alert("you shouldn't put dot in after or before @.  Please Try again")
+
+      return false;
+    }
+    
+    };
+
+
+   let verf = validateEmail(email)
+   
+   if(verf === false) {
+    return;
+   }
 
     try {
       const resUserExists = await fetch("http://localhost:3000/api/auth/login", {
@@ -37,6 +103,7 @@ export default function RegisterForm() {
 
       if (user) {
         setError("User already exists.");
+        alert("User already exists")
         return;
       }
 
@@ -54,12 +121,17 @@ export default function RegisterForm() {
         }),
       });
 
+
       if (res.ok) {
-
+        const token = await res.json();
+        cookie.set('e-mall', token);
         router.push("/Login");
-
+        console.log('res',res)
       } else {
         console.log("User registration failed.");
+        alert("Email already exists. Try another one ")
+        router.push("/Signup");
+  
       }
     } catch (error) {
       console.log("Error during registration: ", error);

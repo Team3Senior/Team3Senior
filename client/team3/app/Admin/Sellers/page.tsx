@@ -1,7 +1,7 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import Link from "next/link";
-import Footer from "../../Footer/page";
+import ConfirmDelete from "./ConfirmDelete";
+
 import { IoSearchOutline } from "react-icons/io5";
 import DeleteIcon from "@mui/icons-material/Delete";
 
@@ -15,6 +15,9 @@ interface Seller {
 const Sellers = () => {
   const [sels, setSels] = useState<Seller[]>([]);
   const [refresh, setRefresh] = useState<boolean>(false);
+  const [show, setShow] = useState<boolean>(false);
+  const [id,setId] = useState<number>(0);
+
 
   const fetchData = async () => {
     try {
@@ -41,6 +44,19 @@ const Sellers = () => {
     }
   };
 
+  
+  const handleCancel = () => {
+    setRefresh(!refresh)
+    setShow(!show)
+  }
+
+  const handleConfirm = () => {
+  
+     deleteSeller(id)
+     setShow(!show)
+  }
+
+
   return (
     <div>
       <div>
@@ -58,13 +74,14 @@ const Sellers = () => {
                 Send an email{" "}
               </button>
               <br />
-              <DeleteIcon onClick={() => deleteSeller(el.UserID)} />
+              <DeleteIcon onClick={() => {setShow(!show);setId(el.UserID)}} />
+              <div> {show && <ConfirmDelete  onConfirm={handleConfirm} onCancel={handleCancel}/>}</div>
             </div>
           ))}
         </div>
       </div>
       <div>
-        <Footer />
+       
       </div>
     </div>
   );
