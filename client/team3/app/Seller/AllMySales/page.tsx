@@ -55,7 +55,7 @@ const AllmySales: React.FC<Product> = ({ userID }) => {
 
 
 
-  const updated = {
+  const updated : any = {
     Name: name,
     Description: description,
     Price: price,
@@ -73,7 +73,7 @@ const AllmySales: React.FC<Product> = ({ userID }) => {
   const deleteProd = async (productID: number) => {
     try {
       await fetch(
-        `http://localhost:3000/api/products/deleteProd/${id}`,
+        `http://localhost:3000/api/products/deleteProd/${productID}`,
         {
           method: "DELETE",
         }
@@ -85,10 +85,14 @@ const AllmySales: React.FC<Product> = ({ userID }) => {
   };
 
 
-  const updateProd = async (id: number) => {
+  const updateProd = async (id: number,prod : Product) => {
     try {
       await fetch(`http://localhost:3000/api/products/updateProd/${id}`, {
         method: "PUT",
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(prod),
       });
       setRefresh(!refresh);
     } catch (err) {
