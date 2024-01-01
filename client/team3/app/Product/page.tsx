@@ -10,6 +10,8 @@ const Product: React.FC = () => {
   const [All, setAll] = useState<any[]>([]);
   const [showAddToCart, setShowAddToCart] = useState<boolean>(false);
 const [index, setIndex] = useState<number>(-1);
+const userId = localStorage.getItem('userId');
+console.log(userId)
 useEffect(() => {
     const fetchData = async () => {
       try {
@@ -67,7 +69,7 @@ return (
                 CartImage: All.ProductImage,
                 Price: All.Price,
                 Quantity: All.Quantity,
-                userUserID: 1,
+                userUserID: userId,
               })
             }
           >

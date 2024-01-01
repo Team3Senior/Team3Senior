@@ -1,16 +1,16 @@
 "use client"
 
 import React, { useState, useEffect } from 'react';
-import Footer from '../../Footer/page';
-import Navbar from '../../Nav/page';
+import Footer from '../Footer/page';
+import Navbar from '../Nav/page';
 import axios from 'axios';
 import { MdDelete } from "react-icons/md";
 import { useRouter} from 'next/navigation';
-import {useParams} from 'next/navigation'
+
 
 
 function Cart() {
-  const params=useParams<{UserId:string}>()
+  const userId = localStorage.getItem('userId');
   const [cartData, setCartData] =  useState<[]>([]);
   const [refresh,setRefresh] = useState<boolean>(true);
   const router=useRouter()
@@ -34,7 +34,7 @@ router.push(path)
   
 
   useEffect(() => {
-    axios.get(`http://localhost:3000/api/cart/UserCart/${params.UserId}`)
+    axios.get(`http://localhost:3000/api/cart/UserCart/${userId}`)
       .then((response) => {
         console.log('houss', response.data);
         setCartData(response.data);

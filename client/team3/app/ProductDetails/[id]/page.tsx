@@ -6,15 +6,11 @@ import { CiSquarePlus } from "react-icons/ci";
 import { CiSquareMinus } from "react-icons/ci";
 import { TfiReload } from "react-icons/tfi";
 import { CiDeliveryTruck } from "react-icons/ci";
-import { useRouter } from 'next/router';
-import { useParams } from 'next/navigation';
+
 import Navbar from '../../Nav/page';
-// import { RootState } from '../../types'; 
+
 import Product from '@/app/Product/page';
 import axios from 'axios';
-import { log } from 'console';
-import ColorPicker from '@/app/ColorPicker/page';
-import SizePicker from '@/app/SizePicker/page';
 interface Product {
   ProductID: number;
   Name: string;
@@ -29,6 +25,7 @@ const ProductDetails: React.FC = () => {
   const [inp, setInp] = useState<number>(0);
   const [hoveredImage, setHoveredImage] = useState(null);
   const [product, setProduct] = useState<Product>([]);
+  const userId = localStorage.getItem('userId');
   const handleImageHover = (imageSrc: string): void => {
     setHoveredImage(imageSrc);
   };
@@ -127,7 +124,7 @@ console.log(product);
             <CiSquarePlus onClick={()=>setInp(inp+1)} className="!left-[9px] !absolute !w-[24px] !h-[24px] !top-[10px]" color="black" />
           </div>
         </div>
-        <button onClick={()=>{addCart({NameCart:product.Name,CartImage:product.ProductImage[0],Price:product.Price,Quantity:product.Quantity,userUserID:1})}} button="small" className="!absolute !left-[1072px] !top-[519px] bg-red rounded w-48 h-12 text-black"  hover={false}    >Buy Now</button>
+        <button onClick={()=>{addCart({NameCart:product.Name,CartImage:product.ProductImage[0],Price:product.Price,Quantity:product.Quantity,userUserID:userId})}} button="small" className="!absolute !left-[1072px] !top-[519px] bg-red rounded w-48 h-12 text-black"  hover={false}    >Buy Now</button>
         <div className="absolute w-[399px] h-[180px] top-[603px] left-[897px] rounded-[4px] overflow-hidden border border-solid border-[#00000080]">
           <div className="absolute w-[399px] h-px top-[90px] left-0 opacity-50">
             <img className="absolute w-[399px] h-px -top-px left-0 object-cover" alt="Line" src="line-1.svg" />

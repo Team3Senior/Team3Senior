@@ -1,4 +1,4 @@
-import React,{useState} from 'react'
+import React, { useState, useEffect } from 'react';
 import Navbar from '../Nav/page'
 import Footer from '../Footer/page'
 
@@ -10,19 +10,22 @@ interface wish {
    }
 
 
-const WishList = (userID :number) => {
+const WishList = () => {
     const[wishes,setWishes]=useState<wish[]>([])
-    console.log(userID);
+    const userId = localStorage.getItem('userId');
 
 
-const fetchWishes = async (userID : number) => {
+const fetchWishes = async () => {
+  if (userId) {
     try {
-      const response = await fetch(`http://localhost:3000/api/wish/getwishes/${userID}`);
+      const response = await fetch(`http://localhost:3000/api/wish/getwishes/${userId}`);
       const tempData = await response.json();
       setWishes(tempData)
     } catch (error) {console.error(error)}
   };
-
+  useEffect(() => {
+    fetchWishes();
+  }, [userId]);
 
   return (
     <div>
