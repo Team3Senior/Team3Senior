@@ -6,7 +6,7 @@ const { Sequelize } = require('sequelize');
  const sequelize = new Sequelize(
   "team3",
   "root",
-  "root",
+  "53037912Aa*",
 
 
   {
