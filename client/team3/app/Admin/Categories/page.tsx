@@ -2,7 +2,7 @@
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
-import Footer from "../../Footer/page";
+
 
 interface Category {
   CategoryID: number;
@@ -136,7 +136,7 @@ const AdminCat = () => {
           ))}
         </div>
       </div>
-      <Footer />
+     
     </div>
   );
 };
