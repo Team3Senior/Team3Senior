@@ -1,12 +1,51 @@
-import React, { FC } from "react";
+"use client"
+import React, { FC, useState, useEffect } from "react";
 import Button from "../Button/page";
 import PlaceboxInfo from "../PlaceboxInfo/page";
 import { FaSquarePhone } from "react-icons/fa6";
 import { GoMail } from "react-icons/go";
+import { useRouter } from "next/navigation";
 import Navbar from "../Nav/page";
 import Footer from "../Footer/page";
 
+interface Category {
+  userName: string;
+  userEmail: string;
+  userNumber: string;
+  userMessage: string;
+}
+
+
 const Contact: FC = () => {
+  const [message, setMessage] = useState<string>("");
+  const [refresh, setRefresh] = useState<boolean>(false);
+  const [show, setShow] = useState<number>(0);
+  const [name, setName] = useState<string>("");
+  const [email, setEmail] = useState<string>("");
+  const [phoneN, setPhoneN] = useState<string>("");
+  const router = useRouter();
+
+  const addmessage = async () => {
+    try {
+      await fetch(`http://localhost:3000/api/addContact`, {
+        method: "post",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          userName: name,
+          userNumber: phoneN,
+          userEmail: email,
+          userMessage: message,
+        }),
+      });
+      setRefresh(!refresh);
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+
 
   return (
     <>
@@ -16,12 +55,16 @@ const Contact: FC = () => {
         <div className="bg-white flex flex-row justify-center w-full">
           <div className="bg-bg w-[1437px] h-[500px] relative">
             <div className="absolute w-[800px] h-[457px] top-[100px] left-[504px] bg-primary rounded-[4px] overflow-hidden shadow-categogy-5">
-              <div className="inline-flex flex-col items-end gap-[32px] relative top-[40px] left-[31px]">
-                <div className="inline-flex items-start gap-[16px] relative flex-[0_0_auto]">
+              <div className="flex-col items-end gap-[32px] relative top-[40px] left-[31px]">
+                <div className=" items-start gap-[16px] relative flex-[0_0_auto]">
                   <div className="relative w-[235px] h-[50px] bg-secondary rounded-[4px]">
                     <p className="text-transparent absolute top-[12px] left-[16px] opacity-50 font-title-16px-regular font-[number:var(--title-16px-regular-font-weight)] text-[length:var(--title-16px-regular-font-size)] tracking-[var(--title-16px-regular-letter-spacing)] leading-[var(--title-16px-regular-line-height)] whitespace-nowrap [font-style:var(--title-16px-regular-font-style)]">
                       <span className="text-black font-title-16px-regular [font-style:var(--title-16px-regular-font-style)] font-[number:var(--title-16px-regular-font-weight)] tracking-[var(--title-16px-regular-letter-spacing)] leading-[var(--title-16px-regular-line-height)] text-[length:var(--title-16px-regular-font-size)]">
-                        <input type="text" placeholder="Your Name" />
+                        <input type="text" placeholder="Your Name"
+                          onChange={(e) => {
+                            setName(e.target.value);
+                          }}
+                        />
                       </span>
                       <span className="text-[#db4444] font-title-16px-regular [font-style:var(--title-16px-regular-font-style)] font-[number:var(--title-16px-regular-font-weight)] tracking-[var(--title-16px-regular-letter-spacing)] leading-[var(--title-16px-regular-line-height)] text-[length:var(--title-16px-regular-font-size)]">
                         *
@@ -31,7 +74,11 @@ const Contact: FC = () => {
                   <div className="relative w-[235px] h-[50px] bg-secondary rounded-[4px]">
                     <p className="text-transparent absolute top-[12px] left-[16px] opacity-50 font-title-16px-regular font-[number:var(--title-16px-regular-font-weight)] text-[length:var(--title-16px-regular-font-size)] tracking-[var(--title-16px-regular-letter-spacing)] leading-[var(--title-16px-regular-line-height)] whitespace-nowrap [font-style:var(--title-16px-regular-font-style)]">
                       <span className="text-black font-title-16px-regular [font-style:var(--title-16px-regular-font-style)] font-[number:var(--title-16px-regular-font-weight)] tracking-[var(--title-16px-regular-letter-spacing)] leading-[var(--title-16px-regular-line-height)] text-[length:var(--title-16px-regular-font-size)]">
-                        <input type="text" placeholder="Your Email" />
+                        <input type="text" placeholder="Your Email"
+                          onChange={(e) => {
+                            setEmail(e.target.value);
+                          }}
+                        />
                       </span>
                       <span className="text-[#db4444] font-title-16px-regular [font-style:var(--title-16px-regular-font-style)] font-[number:var(--title-16px-regular-font-weight)] tracking-[var(--title-16px-regular-letter-spacing)] leading-[var(--title-16px-regular-line-height)] text-[length:var(--title-16px-regular-font-size)]">
                         *
@@ -41,21 +88,34 @@ const Contact: FC = () => {
                   <div className="relative w-[235px] h-[50px] bg-secondary rounded-[4px]">
                     <p className="text-transparent absolute top-[12px] left-[16px] opacity-50 font-title-16px-regular font-[number:var(--title-16px-regular-font-weight)] text-[length:var(--title-16px-regular-font-size)] tracking-[var(--title-16px-regular-letter-spacing)] leading-[var(--title-16px-regular-line-height)] whitespace-nowrap [font-style:var(--title-16px-regular-font-style)]">
                       <span className="text-black font-title-16px-regular [font-style:var(--title-16px-regular-font-style)] font-[number:var(--title-16px-regular-font-weight)] tracking-[var(--title-16px-regular-letter-spacing)] leading-[var(--title-16px-regular-line-height)] text-[length:var(--title-16px-regular-font-size)]">
-                        <input type="text" placeholder="Phone Number" />
+                        <input type="text" placeholder="Phone Number"
+                          onChange={(e) => {
+                            setPhoneN(e.target.value);
+                          }}
+                        />
                       </span>
                       <span className="text-[#db4444] font-title-16px-regular [font-style:var(--title-16px-regular-font-style)] font-[number:var(--title-16px-regular-font-weight)] tracking-[var(--title-16px-regular-letter-spacing)] leading-[var(--title-16px-regular-line-height)] text-[length:var(--title-16px-regular-font-size)]">
                         *
                       </span>
                     </p>
                   </div>
+                  <input type="text" placeholder="Your message Here"
+                          onChange={(e) => {
+                            setMessage(e.target.value);
+                          }}
+                        />
                 </div>
-                <PlaceboxInfo className="!h-[207px] !w-[737px]  " />
-                <Button
-                  button="primary"
-                  className="!flex-[0_0_auto] fill: #ef4444;"
-                  hover={false}
-                  text="Send Massage"
-                />
+               
+               
+                <button
+                  className="bg-black mt-5 h-11 w-52 text-white mb-10 shadow-md rounded"
+                  onClick={() => {
+                    addmessage({ Name: name, phone: phoneN, Email: email, message: message });
+                    // router.push('/Admin/Contact')
+                  }}
+                >
+                  Send Message
+                </button>
               </div>
             </div>
           </div>
@@ -100,7 +160,7 @@ const Contact: FC = () => {
           </div>
         </div>
       </div>
-      <Footer />
+
     </>
   );
 };

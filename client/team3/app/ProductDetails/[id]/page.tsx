@@ -6,15 +6,11 @@ import { CiSquarePlus } from "react-icons/ci";
 import { CiSquareMinus } from "react-icons/ci";
 import { TfiReload } from "react-icons/tfi";
 import { CiDeliveryTruck } from "react-icons/ci";
-import { useRouter } from 'next/router';
-import { useParams } from 'next/navigation';
+
 import Navbar from '../../Nav/page';
-// import { RootState } from '../../types'; 
+
 import Product from '@/app/Product/page';
 import axios from 'axios';
-import { log } from 'console';
-import ColorPicker from '@/app/ColorPicker/page';
-import SizePicker from '@/app/SizePicker/page';
 interface Product {
   ProductID: number;
   Name: string;
