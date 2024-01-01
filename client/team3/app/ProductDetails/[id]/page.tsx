@@ -28,8 +28,8 @@ interface Product {
 const ProductDetails: React.FC = () => {
   const [inp, setInp] = useState<number>(0);
   const [hoveredImage, setHoveredImage] = useState(null);
-  const [product, setProduct] = useState<Product>({});
-  const handleImageHover = (imageSrc) => {
+  const [product, setProduct] = useState<Product>([]);
+  const handleImageHover = (imageSrc: string): void => {
     setHoveredImage(imageSrc);
   };
   const addCart=(obj:object)=>{
@@ -47,8 +47,10 @@ const ratingChanged = (newRating:number) => {
 
 useEffect(() => {
   var currentUrl = window.location.href;
+  var endPoint=currentUrl.split("/")
+  var i=endPoint[endPoint.length-1]
   axios
-    .get<Product>(`http://localhost:3000/api/products/getOneProd/${currentUrl[currentUrl.length - 1]}`)
+    .get<Product>(`http://localhost:3000/api/products/getOneProd/${i}`)
     .then((res) => {
       setProduct(res.data);
     })
@@ -79,18 +81,19 @@ console.log(product);
     />
   ))}
    </div>
-   <div className="absolute w-[500px] h-[600px] top-[274px] left-[342px] bg-secondary rounded-[4px] overflow-hidden">
-     <img className="absolute w-[446px] h-[546px]  left-[27px]"  src={hoveredImage || product && product.ProductImage&&product.ProductImage[0]} alt='Image'  />
-    </div>
+  
     <div className="absolute w-[170px] h-[138px] top-[428px] left-[142px] bg-secondary rounded-[4px] overflow-hidden">
-          <img className="absolute w-[112px] h-[130px] -top-[10px] left-[29px]"  src={hoveredImage || product && product.ProductImage&&product.ProductImage[0]} alt='Image'/>
+          <img className="absolute w-[112px] h-[130px] -top-[10px] left-[29px]"  src={hoveredImage || product.ProductImage&&product.ProductImage[0]} alt='Image1'/>
         </div>
         <div className="absolute w-[170px] h-[138px] top-[582px] left-[142px] bg-secondary rounded-[4px] overflow-hidden">
-          <img className="absolute w-[134px] h-[120px] top-[22px] left-[18px]"  src={hoveredImage || product && product.ProductImage&&product.ProductImage[1]} alt='Image'/>
+          <img className="absolute w-[134px] h-[120px] top-[22px] left-[18px]"  src={hoveredImage || product.ProductImage&&product.ProductImage[1]} alt='Image2'/>
         </div>
         <div className="absolute w-[170px] h-[138px] top-[736px] left-[142px] bg-secondary rounded-[4px] overflow-hidden">
-          <img className="absolute w-[122px] h-[150px] -top-[16px] left-[24px]"  src={hoveredImage || product && product.ProductImage&&product.ProductImage[2]} alt='Image' />
+          <img className="absolute w-[122px] h-[150px] -top-[16px] left-[24px]"  src={hoveredImage || product.ProductImage&&product.ProductImage[2]} alt='Image3' />
         </div>
+        <div className="absolute w-[500px] h-[600px] top-[274px] left-[342px] bg-secondary rounded-[4px] overflow-hidden">
+     <img className="absolute w-[446px] h-[546px]  left-[27px]"  src={hoveredImage || product.ProductImage&&product.ProductImage[0]} alt='Image0'  />
+    </div>
 
     <div className="absolute top-[273px] left-[910px] font-heading-24px-semibold font-[number:var(--heading-24px-semibold-font-weight)] text-text-2 text-[length:var(--heading-24px-semibold-font-size)] tracking-[var(--heading-24px-semibold-letter-spacing)] leading-[var(--heading-24px-semibold-line-height)] whitespace-nowrap [font-style:var(--heading-24px-semibold-font-style)]">
 {product&&product.Name}
@@ -130,10 +133,10 @@ console.log(product);
             </div>
           </div>
           <div className="relative w-[41px] h-[44px] -ml-px bg-secondary-2 rounded-[0px_4px_4px_0px] overflow-hidden">
-            <CiSquarePlus onClick={()=>setInp(inp+1)} className="!left-[9px] !absolute !w-[24px] !h-[24px] !top-[10px]" color="white" />
+            <CiSquarePlus onClick={()=>setInp(inp+1)} className="!left-[9px] !absolute !w-[24px] !h-[24px] !top-[10px]" color="black" />
           </div>
         </div>
-        <button onClick={()=>{addCart({NameCart:product.Name,CartImage:product.ProductImage[0],Price:product.Price,Quantity:product.Quantity,userUserID:1})}} button="small" className="!absolute !left-[1072px] !top-[519px] bg-red rounded w-48 h-12 text-white"  hover={false}    >Buy Now</button>
+        <button onClick={()=>{addCart({NameCart:product.Name,CartImage:product.ProductImage[0],Price:product.Price,Quantity:product.Quantity,userUserID:1})}} button="small" className="!absolute !left-[1072px] !top-[519px] bg-red rounded w-48 h-12 text-black"  hover={false}    >Buy Now</button>
         <div className="absolute w-[399px] h-[180px] top-[603px] left-[897px] rounded-[4px] overflow-hidden border border-solid border-[#00000080]">
           <div className="absolute w-[399px] h-px top-[90px] left-0 opacity-50">
             <img className="absolute w-[399px] h-px -top-px left-0 object-cover" alt="Line" src="line-1.svg" />

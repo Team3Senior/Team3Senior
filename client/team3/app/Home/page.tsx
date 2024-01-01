@@ -119,19 +119,32 @@ const Home: React.FC = () => {
                               setIndex(-1)}}>
                                 <div>
                                
-              <div style={{    'margin-left': '-40%'}} className=' top-full left-0 w-20 rounded h-8 bg-red flex justify-center items-center text-white'>-{el.Discount}%</div>
-              <div style={{'margin-left': '117%',
-          'margin-top': '-30%'}}>
-              <div className='bg-white w-12 h-12 rounded-full flex items-center justify-center'><FaRegHeart size={20}/></div> 
-              <div className='bg-white w-12 h-12 rounded-full flex items-center justify-center'><MdOutlineRemoveRedEye onClick={()=>{flash.splice(f,1)}} size={20}/></div>
-              </div>
+                                {el.Discount && (
+      <div className='absolute top-0 left-0 bg-red text-white rounded-full w-16 h-16 flex items-center justify-center transform -translate-x-2 -translate-y-2'>
+        -{el.Discount}%
+      </div>
+    )}
+                                <div className='ml-[117%] mt-[-30%]'>
+  <div className='bg-white w-12 h-12 rounded-full flex items-center justify-center'><FaRegHeart size={20} /></div>
+  <div className='bg-white w-12 h-12 rounded-full flex items-center justify-center'><MdOutlineRemoveRedEye onClick={() => { flash.splice(f, 1) }} size={20} /></div>
+</div>
               <Link href={`/ProductDetails/${el.ProductID}`} ><img className=' w-40' src={el.ProductImage[0]?el.ProductImage[0]:el.ProductImage} alt="" onClick={()=>{
             }} /></Link>
                </div>
-               {index===f&&showAddToCart&&<div onClick={() => {
-                addCart({NameCart:el.Name,CartImage:el.ProductImage,Price:el.Price,Quantity:el.Quantity,userUserID:1})}}
-                style={{'top': '140%'}} className='cursor-pointer w-80 h-11 bg-black text-white flex justify-center items-center absolute'>Add To Cart</div>}
-                  </div>
+               {index===f&&showAddToCart&&<div
+  onClick={() => {
+    addCart({
+      NameCart: el.Name,
+      CartImage: el.ProductImage,
+      Price: el.Price,
+      Quantity: el.Quantity,
+      userUserID: 1
+    });
+  }}
+  className='cursor-pointer w-80 h-11 bg-black text-white flex justify-center items-center absolute top-40'
+>
+  Add To Cart
+</div>}  </div>
             
             <h1>{el.Name}</h1>
             <div className='flex gap-4'>
