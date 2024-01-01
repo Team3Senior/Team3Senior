@@ -6,11 +6,8 @@ const { Sequelize } = require('sequelize');
  const sequelize = new Sequelize(
   "team2",
   "root",
-<<<<<<< HEAD
   "farahkh",
-=======
-  "root",
->>>>>>> 59a2934361bd656466705c5bcda9d4102941a000
+
 
   {
     host: "localhost",
@@ -19,7 +16,7 @@ const { Sequelize } = require('sequelize');
 );
 sequelize.authenticate().then(r=>console.log('connected')).catch(err => console.log(err))
 
-<<<<<<< HEAD
+
 
 // Define relationships between models
 // User.hasMany(Cart);
@@ -41,8 +38,7 @@ sequelize.authenticate().then(r=>console.log('connected')).catch(err => console.
 // }).catch(err => {
 //   console.error('Error syncing database:', err);
 // });
-=======
->>>>>>> 59a2934361bd656466705c5bcda9d4102941a000
+
 module.exports=sequelize
 
 

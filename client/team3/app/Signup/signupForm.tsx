@@ -73,7 +73,7 @@ export default function RegisterForm() {
   return (
     <div className='bg-white grid grid-cols-2 gap-96 w-full' >
      <div>  <img
-                className="absolute w-[805px] h-[706px] top-[75px] left-0"
+                className="absolute w-[805px] h-[706px] top-[270px] left-0"
                 alt="Dl beatsnoop"
                 src="https://i.imgur.com/nxyvDFz.png"
               /></div>
@@ -107,7 +107,7 @@ export default function RegisterForm() {
             <input
             onChange={(e) => setRole(e.target.value)}
             type="Role"
-            placeholder="Role"
+            placeholder="Specify : seller / client "
           />
           <button className="bg-cyan-50 text-black font-bold cursor-pointer px-6 py-2 hover:bg-red-500">
             Register

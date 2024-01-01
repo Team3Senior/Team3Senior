@@ -1,15 +1,13 @@
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import './globals.css'
-<<<<<<< HEAD
 import { getServerSession } from 'next-auth';
 import Link from 'next/link';
 import Logout from './Logout';
 import Login from './Login/page'
 
-=======
 import Footer from './Footer/page'
->>>>>>> 59a2934361bd656466705c5bcda9d4102941a000
+
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -25,22 +23,11 @@ export default async function RootLayout({
 }) {
   const session = await getServerSession();
   return (
-
     <html lang="en">
-<<<<<<< HEAD
-    <body className={inter.className}>
-      {children}
-    </body>
-  </html>
-
-
-=======
       <meta name="viewport" content="width=device-width, initial-scale=1.0"></meta>
       <body className={inter.className}>
         {children}
         <Footer/></body>
-     
     </html>
->>>>>>> 59a2934361bd656466705c5bcda9d4102941a000
   )
 }
