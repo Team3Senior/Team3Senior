@@ -3,24 +3,32 @@
 import axios, { AxiosError } from "axios";
 import { useRouter } from "next/navigation";
 import Link from 'next/link'
-
+import { useState } from "react";
 export default function Home() {
+  const [userId, setUserId] = useState<string | null>(null);
   const { push } = useRouter();
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState<string>('');
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    const payload = {
-      Email: event.currentTarget.email.value,
-      Password: event.currentTarget.password.value,
-    };
+    // const formData = new FormData(event.currentTarget);
+    // const email = formData.get('email') as string;
+    // const password = formData.get('password') as string;
 
-    console.log("payload",payload)
+    // const payload = {
+    //   Email: email,
+    //   Password: password,
+    // };
+
+    // console.log("payload",payload)
     try {
-      const logUser  = await axios.post("http://localhost:3000/api/auth/login", payload);
+      const logUser  = await axios.post("http://localhost:3000/api/auth/login", { Email: email, Password: password });
 
       alert(JSON.stringify(logUser));
-
+      localStorage.setItem('userId', logUser.data.UserID);
       console.log("data ", logUser)
 if(logUser.data.Role === "admin") {
   push("/Admin")
@@ -36,6 +44,12 @@ if(logUser.data.Role === "admin") {
       const error = e as AxiosError;
 
       alert(error.message);
+    }
+  };
+  const getUserIdFromLocalStorage = () => {
+    const storedUserId = localStorage.getItem('userId');
+    if (storedUserId) {
+      setUserId(storedUserId);
     }
   };
 
@@ -54,16 +68,20 @@ if(logUser.data.Role === "admin") {
 
         <form onSubmit={handleSubmit} className="flex flex-col gap-6">
    
-          <input
-            type="text"
-            placeholder="Email"
-          />
-          <input
-            type="password"
-            placeholder="Password"
-          />
+        <input
+          type="text"
+          placeholder="Email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+        />
+        <input
+          type="password"
+          placeholder="Password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+        />
          
-          <button className="bg-cyan-50 text-black font-bold cursor-pointer px-6 py-2 hover:bg-red-500">
+          <button className="bg-cyan-50 text-black font-bold cursor-pointer px-6 py-2 hover:bg-red-500" onClick={()=>getUserIdFromLocalStorage()}>
             Log In
           </button>
 
