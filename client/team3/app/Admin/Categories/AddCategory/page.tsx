@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import Button from '@mui/material/Button';
 import AddAPhotoIcon from '@mui/icons-material/AddAPhoto';
-import Footer from '../../../Footer/page';
+
 
 const AddCateg = () => {
   const [image, setImage] = useState<File | null>(null);
@@ -97,7 +97,7 @@ const AddCateg = () => {
         
       </div>
 
-      <Footer />
+     
     </div>
   );
 };

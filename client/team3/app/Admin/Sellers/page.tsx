@@ -1,7 +1,7 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
-import Footer from "../../Footer/page";
+
 import { IoSearchOutline } from "react-icons/io5";
 import DeleteIcon from "@mui/icons-material/Delete";
 
@@ -64,7 +64,7 @@ const Sellers = () => {
         </div>
       </div>
       <div>
-        <Footer />
+       
       </div>
     </div>
   );

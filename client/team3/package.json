@@ -19,18 +19,17 @@
     "cookie": "^0.6.0",
     "jason": "^2.0.0",
     "jsonwebtoken": "^9.0.2",
-
     "next": "14.0.4",
     "next-auth": "^4.24.5",
     "react": "^18",
     "react-chartjs-2": "^5.2.0",
     "react-dom": "^18",
     "react-icons": "^4.12.0",
+    "react-router-dom": "^6.21.1",
+    "react-stars": "^2.2.5",
     "styled-components": "^6.1.6",
     "token": "^0.1.0",
-    "web": "^0.0.2",
-    "react-router-dom": "^6.21.1",
-    "react-stars": "^2.2.5"
+    "web": "^0.0.2"
   },
   "devDependencies": {
     "@types/node": "^20",

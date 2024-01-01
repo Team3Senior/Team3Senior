@@ -107,7 +107,7 @@ export default function RegisterForm() {
             <input
             onChange={(e) => setRole(e.target.value)}
             type="Role"
-            placeholder="Role"
+            placeholder="Specify : seller / client "
           />
           <button className="bg-cyan-50 text-black font-bold cursor-pointer px-6 py-2 hover:bg-red-500">
             Register

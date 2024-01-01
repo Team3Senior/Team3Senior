@@ -2,7 +2,7 @@
 import React, {useState,useEffect} from 'react'
 import { IoSearchOutline } from "react-icons/io5";
 import Link from 'next/link';
-import Footer from '../Footer/page';
+
 
 
 
@@ -164,7 +164,7 @@ const otherChart = {
         </div>
       </div>
       </div>
-      <Footer/>
+      
 
 
     </div>

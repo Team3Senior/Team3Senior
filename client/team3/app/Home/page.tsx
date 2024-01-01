@@ -125,7 +125,7 @@ axios.post("http://localhost:3000/api/wish/addwish",toWishlist).then((result)=>{
                               setIndex(-1)}}>
                                 <div>
                                
-              <div style={{    'margin-left': '-40%'}} className=' top-full left-0 w-20 rounded h-8 bg-red flex justify-center items-center text-white'>-{el.Discount}%</div>
+              <div style={{    'margin-left': '-40%'}} className=' top-full left-0 w-20 rounded h-8 bg-red-500 flex justify-center items-center text-white'>-{el.Discount}%</div>
               <div style={{'margin-left': '117%',
           'margin-top': '-30%'}}>
               <div className='bg-white w-12 h-12 rounded-full flex items-center justify-center'><FaRegHeart onClick={()=>{addWished(el)}} size={20}/></div> 
