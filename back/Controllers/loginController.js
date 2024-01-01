@@ -17,15 +17,12 @@ const generateToken = (UserID,Role) => {
            if(result ===null) res.send("email not found")
            else {
             const verif=result.dataValues.Password
+
             const passwordMatch = await bcrypt.compare(Password,verif)
-// console.log("verif",verif)
-// console.log("pw",Password)
-// console.log("result",result)
-// console.log("passmatch", passwordMatch)
 
 
             if(passwordMatch){
-               const token=generateToken(result.dataValues.UserID, result.dataValues.FirstName, result.dataValues.LastName, result.dataValues.Role)  
+               const token=generateToken(result.dataValues.UserID, result.dataValues.Role)  
                result.dataValues.token=token
               res.send(result.dataValues)
             }

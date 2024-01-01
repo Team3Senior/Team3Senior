@@ -1,18 +1,21 @@
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
-const User = require('../Models/user');
-// const secretKey = 'my_secret_key_2023$#@!';
 const {addUser} = require('./UserController.js');
-
-
-// const generateToken = (UserID, FirstName,LastName) => {
-//     const expiresIn = 60 * 60 * 48;//2days
-//     return jwt.sign({ UserID, FirstName,LastName}, 'secretKey', { expiresIn: expiresIn });
-//   };
+const User = require('../Models/user');
 
   
   const Register = async (req, res) => {
     const { FirstName,LastName, Email, Password ,Role } = req.body;
+  
+    const alreadyExistsUser = await User.findOne({ where: { Email } }).catch(
+      (err) => {
+        console.log("Error: ", err);
+      }
+    );
+
+    if (alreadyExistsUser) {
+      return res.status(409).json({ message: "User with email already exists!" });
+    }
   
     try {
       const hashedPassword = await bcrypt.hash(Password, 10);
@@ -24,10 +27,12 @@ const {addUser} = require('./UserController.js');
         Role,
         Password: hashedPassword}
        
-       addUser({ body: newUser }, res);
+       const savedUser = await addUser({ body: newUser }, res);
+       if (savedUser) res.json({ message: "Thanks for registering" })
     } catch (error) {
       res.status(500).json({ error: 'Error' });
     }
+    
   };
   
   

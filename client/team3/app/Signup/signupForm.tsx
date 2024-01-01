@@ -3,7 +3,10 @@
 import Link from "next/link";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import Footer from "../Footer/page";
+
+import cookie from 'js-cookie'
+
+
 
 export default function RegisterForm() {
 
@@ -54,8 +57,10 @@ export default function RegisterForm() {
         }),
       });
 
-      if (res.ok) {
 
+      if (res.ok) {
+        const token = await res.json();
+        cookie.set('e-mall', token);
         router.push("/Login");
 
       } else {

@@ -3,34 +3,48 @@
 import axios, { AxiosError } from "axios";
 import { useRouter } from "next/navigation";
 import Link from 'next/link'
+import cookie from 'js-cookie'
 
-export default function Home() {
+
+export default function LoginForm() {
   const { push } = useRouter();
+
+
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
     const payload = {
-      Email: event.currentTarget.email.value,
-      Password: event.currentTarget.password.value,
+      Email: event.currentTarget.Email.value,
+      Password: event.currentTarget.Password.value,
     };
 
+
+
     console.log("payload",payload)
+
     try {
       const logUser  = await axios.post("http://localhost:3000/api/auth/login", payload);
 
-      alert(JSON.stringify(logUser));
+      console.log("logUser.data", logUser.data)
 
-      console.log("data ", logUser)
-if(logUser.data.Role === "admin") {
-  push("/Admin")
-}
- if(logUser.data.Role === "client") {
-  push('/Home')
-}
+
+      if (logUser.data.Role === "admin") {
+        
+      const token = await logUser.data.Token;
       
-      // redirect the user to home 
-      // push("/Home");
+
+        cookie.set('e-mall', token, {path : "/"} );
+        alert('Hello Admin')
+        push("/Admin");
+      } else if (logUser.data.Role === "client" || logUser.data.Role === "seller" ) {
+        
+      const token = await logUser.data.Token;
+        cookie.set('e-mall', token, {path : "/"});
+        alert('Logged in Successfully')
+       push('/Home')
+}
+
 
     } catch (e) {
       const error = e as AxiosError;
@@ -55,10 +69,12 @@ if(logUser.data.Role === "admin") {
         <form onSubmit={handleSubmit} className="flex flex-col gap-6">
    
           <input
+          name ='Email'
             type="text"
             placeholder="Email"
           />
           <input
+          name='Password'
             type="password"
             placeholder="Password"
           />
