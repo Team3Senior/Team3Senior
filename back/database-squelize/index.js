@@ -4,9 +4,11 @@ const { Sequelize } = require('sequelize');
 
 // Create Sequelize instance
  const sequelize = new Sequelize(
-  "team2",
+
+  "team3",
   "root",
-  "farahkh",
+  "53037912Aa*",
+
 
 
   {

@@ -27,8 +27,11 @@ module.exports={
     updateProd: async(req,res) => {
       let upProd = await Product.update(req.body,{where:{ProductID : req.params.ProductID}})
       res.json(upProd)
-    }
-      
+    },
+    getProdOfUser:async(req,res)=>{
+      let pu=await Product.findAll({where:{userUserID: req.params.UserID}})
+      res.json(pu)
+    }, 
        
     }
 
