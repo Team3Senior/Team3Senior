@@ -11,7 +11,7 @@ import axios from 'axios';
 import { useCartStore } from '../stores/CartStore';
 
 
-const Nav: React.FC = () => {
+const Nav: React.FC = (props:{}) => {
   const router = useRouter()
   console.log(router);
   const userId = localStorage.getItem('userId');
@@ -71,7 +71,7 @@ const Nav: React.FC = () => {
               size={25}
               className='cursor-pointer'
             />
-            <FaRegHeart size={25} />
+            <FaRegHeart  onClick={() => navigateTo('/wishlist')}  size={25} />
             <div className='w-5 h-5 bg-red-500 rounded-full flex justify-center items-center text-white'>
               {cartStore.cart.length}
             </div>

@@ -5,7 +5,7 @@ import { FaArrowRight } from "react-icons/fa";
 import { FaRegHeart } from "react-icons/fa6";
 import { MdOutlineRemoveRedEye } from "react-icons/md";
 import Link from 'next/link';
-
+import axios from 'axios';
 
 
 interface product {
@@ -17,10 +17,20 @@ interface product {
   }
 
 const Concurrence = () => {
-
+  const userId = localStorage.getItem('userId');
 const [prods,setProds] = useState<product[]>([])
 
-
+const addWished=(wished:any)=>{
+  console.log("add to wishlist working fine!")
+const toWishlist={
+  NameWish:wished.Name,
+  WishPrice:wished.Price,
+  userUserID:userId
+}
+axios.post("http://localhost:3000/api/wish/addwish",toWishlist).then((result)=>{
+  console.log(result.data)
+}).catch((err)=>{console.log(err.message)})
+}
 const fetchData = async () => {
     try {
       const res = await fetch("http://localhost:3000/api/products/allProducts");
@@ -54,11 +64,11 @@ const fetchData = async () => {
                          
         <div className=' top-full left-0  w-20 rounded h-8 bg-red-500 flex justify-center items-center text-white'>-{el.Discount}%</div>
         <div>
-        <div className='bg-white w-12 h-12 rounded-full flex items-center justify-center'><FaRegHeart size={20}/></div> 
+        <div className='bg-white w-12 h-12 rounded-full flex items-center justify-center'><FaRegHeart onClick={()=>{addWished(el)}} size={20}/></div> 
         <div className='bg-white w-12 h-12 rounded-full flex items-center justify-center'><MdOutlineRemoveRedEye size={20}/></div>
 
         </div>
-        <img className=' w-40 ' src={el.ProductImage} alt="" />
+        <img className=' w-40 ' src={el.ProductImage[0]} alt="" />
         </div>
 
   

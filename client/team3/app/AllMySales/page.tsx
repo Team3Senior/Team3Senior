@@ -7,6 +7,7 @@ import { FaRegHeart } from "react-icons/fa6";
 import { setRef } from '@mui/material';
 import { IoSearchOutline } from "react-icons/io5";
 import DeleteIcon from "@mui/icons-material/Delete";
+const userId = localStorage.getItem('userId');
 interface Product {
   id: string;
   ProductID: string;
@@ -24,7 +25,7 @@ interface Product {
 
 
 
-const AllmySales: React.FC<Product> = ({ userID }) => {
+const AllmySales: React.FC<Product> = () => {
   const [allSales, setAllSales] = useState<Product[]>([]);
   const [refresh, setRefresh] = useState(false);
   const [show, setShow] = useState<string | null>(null);
@@ -37,11 +38,11 @@ const AllmySales: React.FC<Product> = ({ userID }) => {
   const [color, setColor] = useState('');
   const [size, setSize] = useState('');
 
-  console.log('monji', userID);
+ 
 
   const fetchData = async () => {
     try {
-      const res = await fetch(`http://localhost:3000/api/products/prodsOfUser/2`);
+      const res = await fetch(`http://localhost:3000/api/products/prodsOfUser/${userId}`);
       const data = await res.json();
       setAllSales(data);
 
@@ -70,10 +71,10 @@ const AllmySales: React.FC<Product> = ({ userID }) => {
 
 
  
-  const deleteProd = async (productID: number) => {
+  const deleteProd = async (productID: string) => {
     try {
       await fetch(
-        `http://localhost:3000/api/products/deleteProd/${id}`,
+        `http://localhost:3000/api/products/deleteProd/${productID}`,
         {
           method: "DELETE",
         }
@@ -85,7 +86,7 @@ const AllmySales: React.FC<Product> = ({ userID }) => {
   };
 
 
-  const updateProd = async (id: number) => {
+  const updateProd = async (id: string) => {
     try {
       await fetch(`http://localhost:3000/api/products/updateProd/${id}`, {
         method: "PUT",
@@ -125,7 +126,7 @@ const AllmySales: React.FC<Product> = ({ userID }) => {
               {el.ProductImage[0]}
               <div className='w-80 h-72 bg-gray mt-10 flex-wrap'>
                 {el.Discount ? <div className=' top-full left-0 w-20 rounded h-8 bg-red flex justify-center items-center text-white '>-{el.Discount}%</div> : ''}
-                <img className=' w-50 h-52 ml-16 ' src={el.ProductImage} alt="" />
+                <img className=' w-50 h-52 ml-16 ' src={el.ProductImage[0]} alt="" />
 
                 <div>{el.Availability === 'In Stock' ? <h1 className=' font-semibold text-lime-600 my-3' style={{ 'color': 'green' }}> In Stock </h1> : <h1 className='text-red'> Out of Stock </h1>}</div>
 
@@ -216,7 +217,7 @@ const AllmySales: React.FC<Product> = ({ userID }) => {
                     />
                   </div>
                   <button className='hover:shadow-lg hover:bg-white px-6 py-3 mb-1 mr-1 text-sm font-bold text-black bg-red uppercase rounded shadow'
-                    onClick={() => { updateProd(el.ProductID, updated); setShow(null) }}> Validate </button>
+                    onClick={() => { updateProd(el.ProductID); setShow(null) }}> Validate </button>
                 </div>
               }</div>
             </div>

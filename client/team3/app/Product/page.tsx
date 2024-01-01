@@ -28,17 +28,24 @@ useEffect(() => {
     };
     fetchData();
   }, []);
- 
+  const addWished=(wished:any)=>{
+    console.log("add to wishlist working fine!")
+  const toWishlist={
+    NameWish:wished.Name,
+    WishPrice:wished.Price,
+    userUserID:userId
+  }
+  axios.post("http://localhost:3000/api/wish/addwish",toWishlist).then((result)=>{
+    console.log(result.data)
+  }).catch((err)=>{console.log(err.message)})
+  }
   const addCart=(obj:object)=>{
     axios.post("http://localhost:3000/api/cart/addCart",obj)
     .then((res)=>{console.log(res)})
     .catch((err)=>console.log(err))
   }
   
-  const addwish=(obj:object)=>{
-    axios.post('http://localhost:3000/api/wish/addwish',obj)
-    .then((res)=>console.log('addded')).catch(err=>console.log(err))
-  }
+ 
 
 console.log(All);
 return (
@@ -58,7 +65,7 @@ return (
           onMouseLeave={()=>{setShowAddToCart(!showAddToCart)
           setIndex(-1)}}>
           <div className=' top-full left-0 w-20 rounded h-8 bg-red flex justify-center items-center text-white '>-{All.Discount}%</div>
-          <div className='bg-white w-12 h-12 rounded-full flex items-center justify-center float-right'><FaRegHeart size={20}/> </div>
+          <div className='bg-white w-12 h-12 rounded-full flex items-center justify-center float-right'><FaRegHeart onClick={()=>{addWished(All)}}size={20}/> </div>
           <div className='bg-white w-12 h-12 rounded-full flex items-center justify-center float-right'><MdOutlineRemoveRedEye size={20}/></div>
           {index === i && showAddToCart && (
           <button

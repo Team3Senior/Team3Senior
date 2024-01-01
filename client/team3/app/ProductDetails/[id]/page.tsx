@@ -24,7 +24,7 @@ interface Product {
 const ProductDetails: React.FC = () => {
   const [inp, setInp] = useState<number>(0);
   const [hoveredImage, setHoveredImage] = useState(null);
-  const [product, setProduct] = useState<Product>([]);
+  const [product, setProduct] = useState<Product>({});
   const userId = localStorage.getItem('userId');
   const handleImageHover = (imageSrc: string): void => {
     setHoveredImage(imageSrc);

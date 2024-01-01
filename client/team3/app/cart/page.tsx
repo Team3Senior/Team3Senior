@@ -64,7 +64,7 @@ router.push(path)
         {cartData.map((item:any, i) => (
           <div key={i} className='grid grid-cols-4 mt-10 shadow items-center h-14 w-5/6 ' style={{'display':'flex','justifyContent':'space-around'}}>
            
-            <img className='w-10 ml-10' src={item.CartImage} alt="no-content" />
+            <img className='w-10 ml-10' src={item.CartImage[0]} alt="no-content" />
             <h1 className='ml-10'>{item.Price}</h1>
             <input
               className='w-10 ml-10 border-gray-300 border rounded'

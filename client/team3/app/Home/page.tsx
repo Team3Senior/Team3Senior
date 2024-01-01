@@ -6,8 +6,8 @@ import axios from 'axios'
 import Link from "next/link";
 import { useRouter } from 'next/navigation';
 import { FaRegHeart } from "react-icons/fa";
-import { AiOutlineShoppingCart } from "react-icons/ai";
-import { IoSearchOutline } from "react-icons/io5";
+//import { AiOutlineShoppingCart } from "react-icons/ai";
+//import { IoSearchOutline } from "react-icons/io5";
 import { CgProfile } from "react-icons/cg";
 import { FaArrowLeft } from "react-icons/fa";
 import { MdOutlineRemoveRedEye } from "react-icons/md";
@@ -54,7 +54,17 @@ const Home: React.FC = () => {
       .then((res) => { console.log(res); })
       .catch((err) => console.log(err));
   };
-
+const addWished=(wished:any)=>{
+  console.log("add to wishlist working fine!")
+const toWishlist={
+  NameWish:wished.Name,
+  WishPrice:wished.Price,
+  userUserID:userId
+}
+axios.post("http://localhost:3000/api/wish/addwish",toWishlist).then((result)=>{
+  console.log(result.data)
+}).catch((err)=>{console.log(err.message)})
+}
   return(
     <>
 <Nav />
@@ -119,7 +129,7 @@ const Home: React.FC = () => {
           onMouseLeave={()=>{setShowAddToCart(!showAddToCart)
           setIndex(-1)}}>
           <div className=' top-full left-0 w-20 rounded h-8 bg-red flex justify-center items-center text-black '>-{el.Discount}%</div>
-          <div className='bg-white w-12 h-12 rounded-full flex items-center justify-center float-right'><FaRegHeart size={20}/> </div>
+          <div className='bg-white w-12 h-12 rounded-full flex items-center justify-center float-right'><FaRegHeart onClick={()=>{addWished(el)}}size={20}/> </div>
           <div className='bg-white w-12 h-12 rounded-full flex items-center justify-center float-right'><MdOutlineRemoveRedEye size={20}/></div>
           {index === i && showAddToCart && (
           <button
