@@ -1,12 +1,45 @@
-import React, { FC } from 'react';
-import  Button  from '../Button/page';
-import  PlaceboxInfo  from '../PlaceboxInfo/page';
-import { FaSquarePhone } from 'react-icons/fa6';
-import { GoMail } from 'react-icons/go';
-import Navbar from '../Nav/page';
-import Footer from '../Footer/page';
+"use client"
+import React, { FC,useState, useEffect } from "react";
+import Button from "../Button/page";
+import PlaceboxInfo from "../PlaceboxInfo/page";
+import { FaSquarePhone } from "react-icons/fa6";
+import { GoMail } from "react-icons/go";
+import { useRouter } from "next/navigation";
+import Navbar from "../Nav/page";
+import Footer from "../Footer/page";
+
+interface Category {
+  userName: string;
+  userEmail: string;
+  userNumber: string;
+  userMessage:string;
+}
+
 
 const Contact: FC = () => {
+  const [categs, setCategs] = useState<Category[]>([]);
+  const [refresh, setRefresh] = useState<boolean>(false);
+  const [show, setShow] = useState<number>(0);
+  const [name, setName] = useState<string>("");
+  const router = useRouter();
+
+  const updateCateg = async (id: number, newdata: { userMessage:string; }) => {
+    try {
+      await fetch(`http://localhost:3000/api/addContact`, {
+        method: "post",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(newdata),
+      });
+      setRefresh(!refresh);
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+
+
   return (
     <>
       <div>
@@ -22,7 +55,9 @@ const Contact: FC = () => {
                       <span className="text-black font-title-16px-regular [font-style:var(--title-16px-regular-font-style)] font-[number:var(--title-16px-regular-font-weight)] tracking-[var(--title-16px-regular-letter-spacing)] leading-[var(--title-16px-regular-line-height)] text-[length:var(--title-16px-regular-font-size)]">
                         <input type="text" placeholder="Your Name" />
                       </span>
-                      <span className="text-[#db4444] font-title-16px-regular [font-style:var(--title-16px-regular-font-style)] font-[number:var(--title-16px-regular-font-weight)] tracking-[var(--title-16px-regular-letter-spacing)] leading-[var(--title-16px-regular-line-height)] text-[length:var(--title-16px-regular-font-size)]">*</span>
+                      <span className="text-[#db4444] font-title-16px-regular [font-style:var(--title-16px-regular-font-style)] font-[number:var(--title-16px-regular-font-weight)] tracking-[var(--title-16px-regular-letter-spacing)] leading-[var(--title-16px-regular-line-height)] text-[length:var(--title-16px-regular-font-size)]">
+                        *
+                      </span>
                     </p>
                   </div>
                   <div className="relative w-[235px] h-[50px] bg-secondary rounded-[4px]">
@@ -30,7 +65,9 @@ const Contact: FC = () => {
                       <span className="text-black font-title-16px-regular [font-style:var(--title-16px-regular-font-style)] font-[number:var(--title-16px-regular-font-weight)] tracking-[var(--title-16px-regular-letter-spacing)] leading-[var(--title-16px-regular-line-height)] text-[length:var(--title-16px-regular-font-size)]">
                         <input type="text" placeholder="Your Email" />
                       </span>
-                      <span className="text-[#db4444] font-title-16px-regular [font-style:var(--title-16px-regular-font-style)] font-[number:var(--title-16px-regular-font-weight)] tracking-[var(--title-16px-regular-letter-spacing)] leading-[var(--title-16px-regular-line-height)] text-[length:var(--title-16px-regular-font-size)]">*</span>
+                      <span className="text-[#db4444] font-title-16px-regular [font-style:var(--title-16px-regular-font-style)] font-[number:var(--title-16px-regular-font-weight)] tracking-[var(--title-16px-regular-letter-spacing)] leading-[var(--title-16px-regular-line-height)] text-[length:var(--title-16px-regular-font-size)]">
+                        *
+                      </span>
                     </p>
                   </div>
                   <div className="relative w-[235px] h-[50px] bg-secondary rounded-[4px]">
@@ -38,12 +75,19 @@ const Contact: FC = () => {
                       <span className="text-black font-title-16px-regular [font-style:var(--title-16px-regular-font-style)] font-[number:var(--title-16px-regular-font-weight)] tracking-[var(--title-16px-regular-letter-spacing)] leading-[var(--title-16px-regular-line-height)] text-[length:var(--title-16px-regular-font-size)]">
                         <input type="text" placeholder="Phone Number" />
                       </span>
-                      <span className="text-[#db4444] font-title-16px-regular [font-style:var(--title-16px-regular-font-style)] font-[number:var(--title-16px-regular-font-weight)] tracking-[var(--title-16px-regular-letter-spacing)] leading-[var(--title-16px-regular-line-height)] text-[length:var(--title-16px-regular-font-size)]">*</span>
+                      <span className="text-[#db4444] font-title-16px-regular [font-style:var(--title-16px-regular-font-style)] font-[number:var(--title-16px-regular-font-weight)] tracking-[var(--title-16px-regular-letter-spacing)] leading-[var(--title-16px-regular-line-height)] text-[length:var(--title-16px-regular-font-size)]">
+                        *
+                      </span>
                     </p>
                   </div>
                 </div>
                 <PlaceboxInfo className="!h-[207px] !w-[737px]  " />
-                <Button button="primary" className="!flex-[0_0_auto] fill: #ef4444;" hover={false} text="Send Massage" />
+                <Button
+                  button="primary"
+                  className="!flex-[0_0_auto] fill: #ef4444;"
+                  hover={false}
+                  text="Send Massage"
+                />
               </div>
             </div>
           </div>
