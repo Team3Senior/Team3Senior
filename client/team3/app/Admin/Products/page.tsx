@@ -1,7 +1,6 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
-import Footer from "../../Footer/page";
 import { IoSearchOutline } from "react-icons/io5";
 import { GrUpdate } from "react-icons/gr";
 import { MdOutlineRemoveRedEye } from "react-icons/md";
