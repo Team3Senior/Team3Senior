@@ -19,6 +19,8 @@ const generateToken = (UserID,Role) => {
             const verif=result.dataValues.Password
 
             const passwordMatch = await bcrypt.compare(Password,verif)
+            console.log("verif",verif)
+            console.log("Pass", Password)
 
 
             if(passwordMatch){

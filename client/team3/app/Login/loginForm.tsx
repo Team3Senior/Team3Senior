@@ -28,22 +28,28 @@ export default function LoginForm() {
 
       console.log("logUser.data", logUser.data)
 
+    
 
+      const token = await logUser.data.token;
       if (logUser.data.Role === "admin") {
         
-      const token = await logUser.data.Token;
-      
 
-        cookie.set('e-mall', token, {path : "/"} );
+
+        cookie.set('e-mall', "true");
         alert('Hello Admin')
         push("/Admin");
-      } else if (logUser.data.Role === "client" || logUser.data.Role === "seller" ) {
+      } else if (logUser.data.Role === "client" ) {
         
-      const token = await logUser.data.Token;
-        cookie.set('e-mall', token, {path : "/"});
+   
+        cookie.set('e-mall', token);
         alert('Logged in Successfully')
        push('/Home')
-}
+      }
+      else if(logUser.data.Role === "seller"){
+        cookie.set('e-mall', "true");
+        alert('Welcome to your products manager')
+        push('/Seller')
+      }
 
 
     } catch (e) {
@@ -54,14 +60,14 @@ export default function LoginForm() {
   };
 
   return (
-     <div className='bg-white grid grid-cols-2 gap-96 w-full' >
+     <div className='bg-white grid grid-cols-2 gap-96 w-full mt-44 ' >
      <div>  <img
-                className="absolute w-[805px] h-[706px] top-[270px] left-0"
+                className="absolute"
                 alt="Dl beatsnoop"
                 src="https://i.imgur.com/nxyvDFz.png"
               /></div>
 
-    <div className="grid h-screen w-96 mt-20">
+    <div className="grid h-screen w-96 ">
       <div className="shadow-xl p-5 rounded-lg border-t-4 border-black">
         <h1 className="text-4xl  text-center font-bold my-4 py-20"> ℰ-ℳ𝒶𝓁𝓁 🛒 <h3 className="text-xs mt-3"> Welcome Back</h3></h1>
        
