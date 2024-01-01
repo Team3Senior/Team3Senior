@@ -10,7 +10,7 @@ import DeleteIcon from "@mui/icons-material/Delete";
 interface Product {
   id: string;
   ProductID: string;
-  ProductImage: string[];
+  ProductImage: string;
   Name: string;
   Description: string;
   Price: number;
@@ -28,14 +28,14 @@ const AllmySales: React.FC<Product> = ({ userID }) => {
   const [allSales, setAllSales] = useState<Product[]>([]);
   const [refresh, setRefresh] = useState(false);
   const [show, setShow] = useState<string | null>(null);
-  const [name, setName] = useState('');
-  const [description, setDescription] = useState('');
-  const [quantity, setQuantity] = useState(0);
-  const [price, setPrice] = useState(0);
-  const [availability, setAvailability] = useState('');
-  const [discount, setDiscount] = useState(0);
-  const [color, setColor] = useState('');
-  const [size, setSize] = useState('');
+  const [name, setName] = useState<string>('');
+  const [description, setDescription] = useState<string>('');
+  const [quantity, setQuantity] = useState<number>(0);
+  const [price, setPrice] = useState<number>(0);
+  const [availability, setAvailability] = useState<string>('');
+  const [discount, setDiscount] = useState<number>(0);
+  const [color, setColor] = useState<string>('');
+  const [size, setSize] = useState<string>('');
 
   console.log('monji', userID);
 
@@ -107,10 +107,10 @@ const AllmySales: React.FC<Product> = ({ userID }) => {
           <h3 className='text-'>Make Discount on your sales and win Gold Coupon </h3>
         </div>
         <div className='flex justify-center gap-8 mt-11 mb-6'>
-          <Link href={'/seller'}>Home</Link>
-          <Link href={'/contactAdmin'}>Contact Administration</Link>
-          <Link href={'/addforsale'}>Add For Sale</Link>
-          <Link href={'/allmysales'}>All My Sales </Link>
+          <Link href={'/Seller'}>Home</Link>
+          <Link href={'/ContactAdmin'}>Contact Administration</Link>
+          <Link href={'/Addforsale'}>Add For Sale</Link>
+          <Link href={'/Allmysales'}>All My Sales </Link>
 
           <div className='w-auto h-8 flex float-right gap-16 absolute right-10 top-20'>
             <CgProfile size={25} />
@@ -140,7 +140,7 @@ const AllmySales: React.FC<Product> = ({ userID }) => {
 
               </div>
               <button className="hover:shadow-lg hover:text-red px-6 py-3 mb-1 mr-1 text-sm font-bold text-black bg-white uppercase rounded shadow "
-                type="button" onClick={() => { deleteProd(el.ProductID) }}> Delete </button>
+                type="button" onClick={() => { deleteProd(Number(el.ProductID)) }}> Delete </button>
               <button className="hover:shadow-lg hover:text-red px-6 py-3 mb-1 mr-1 text-sm font-bold text-black bg-white uppercase rounded shadow "
                 type="button" onClick={() => { setShow(show === el.ProductID ? null : el.ProductID) }}> Update</button>
               <div>{show === el.ProductID &&
@@ -220,7 +220,7 @@ const AllmySales: React.FC<Product> = ({ userID }) => {
                     />
                   </div>
                   <button className='hover:shadow-lg hover:bg-white px-6 py-3 mb-1 mr-1 text-sm font-bold text-black bg-red uppercase rounded shadow'
-                    onClick={() => { updateProd(el.ProductID, updated); setShow(null) }}> Validate </button>
+                    onClick={() => { updateProd(Number(el.ProductID), updated); setShow(null) }}> Validate </button>
                 </div>
               }</div>
             </div>
