@@ -1,7 +1,6 @@
 import React from "react"
 import next from "next"
 import Link from "next/link"
-import Logout from "../Logout"
 export default function AdminLayout({
     children, // will be a page or nested layout
   }: {
@@ -19,7 +18,6 @@ export default function AdminLayout({
         <Link href='/Admin/Sellers'>Sellers</Link>
         <Link href='/Admin/Categories'>Categories</Link>
         <Link href='/Admin/Products'>Products</Link>
-        <Logout/>
         <div>
         <input type="search"
             placeholder='What are you looking for?'

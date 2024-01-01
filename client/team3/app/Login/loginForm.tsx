@@ -36,7 +36,9 @@ if(logUser.data.Role === "admin") {
  if(logUser.data.Role === "client") {
   push('/Home')
 }
-      
+if(logUser.data.Role === "seller") {
+  push('/Seller')
+}
       // redirect the user to home 
       // push("/Home");
 

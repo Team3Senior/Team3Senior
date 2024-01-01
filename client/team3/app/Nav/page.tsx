@@ -72,7 +72,7 @@ const Nav: React.FC = (props:{}) => {
               className='cursor-pointer'
             />
             <FaRegHeart  onClick={() => navigateTo('/wishlist')}  size={25} />
-            <div className='w-5 h-5 bg-red-500 rounded-full flex justify-center items-center text-white'>
+            <div className='w-5 h-5  bg-red-500 rounded-full  flex justify-center items-center text-white'>
               {cartStore.cart.length}
             </div>
             <AiOutlineShoppingCart
