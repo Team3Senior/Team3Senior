@@ -4,7 +4,7 @@ import Link from "next/link";
 import { IoSearchOutline } from "react-icons/io5";
 import { GrUpdate } from "react-icons/gr";
 import { MdOutlineRemoveRedEye } from "react-icons/md";
-import ConfirmDelete from "./ConfirmDelete";
+import ConfirmDelete from "../Categories/ConfirmDelete";
 
 interface Product {
   ProductID: number;
@@ -82,7 +82,7 @@ const AdminProducts = () => {
           <div key={el.ProductID} className="">
             <div className="w-80 h-72 flex justify-center items-center mt-11">
              
-              <img className="w-40" src={el.ProductImage} alt="" />
+              <img className="w-40" src={el.ProductImage[0]} alt="" />
             </div>
 
             <h1>{el.Name}</h1>

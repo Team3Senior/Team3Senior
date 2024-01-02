@@ -64,7 +64,7 @@ console.log(product);
 <div className="bg-white flex flex-row justify-center w-full">
 <div className="bg-white w-[1437px] h-[1077px] relative">
 <div className="absolute w-[500px] h-[600px] top-[274px] left-[342px] bg-secondary rounded-[4px] overflow-hidden">
-     <img className="absolute w-[446px] h-[546px]  left-[27px]"  src={hoveredImage || product.ProductImage&&product.ProductImage[3]} alt='Image0'  />
+     <img className="absolute w-[446px] h-[546px]  left-[27px]"  src={hoveredImage || product.ProductImage&&product.ProductImage[0]} alt='Image0'  />
     </div>
     <div className="grid grid-cols-1   top-0 right-0">
       {/* Map through images and display smaller images */}
