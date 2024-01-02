@@ -2,6 +2,7 @@
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import ConfirmDelete from "./ConfirmDelete";
 
 
 interface Category {
@@ -15,6 +16,8 @@ const AdminCat = () => {
   const [refresh, setRefresh] = useState<boolean>(false);
   const [show, setShow] = useState<number>(0);
   const [name, setName] = useState<string>("");
+  const [showConf, setShowConf] = useState<boolean>(false);
+  const [id,setId] = useState<number>(0);
   const router = useRouter();
 
   console.log("name", name);
@@ -34,6 +37,7 @@ const AdminCat = () => {
   useEffect(() => {
     fetchData();
   }, [refresh, router]);
+
 
   const deleteCateg = async (id: number) => {
     try {
@@ -61,8 +65,22 @@ const AdminCat = () => {
     }
   };
 
+  const handleCancel = () => {
+    setRefresh(!refresh)
+    setShowConf(!showConf)
+  }
+
+  const handleConfirm = () => {
+  
+     deleteCateg(id)
+     setShowConf(!showConf)
+  }
+
   return (
     <div>
+       <div>
+           {showConf && <ConfirmDelete  onConfirm={handleConfirm} onCancel={handleCancel}/>}
+           </div>
       <div>
         <div className="flex justify-center align-middle bg-black text-white h-20 gap-40 mb-6 items-center">
           <Link href="/Admin/Categories/AddCategory">Add New Category</Link>
@@ -93,7 +111,7 @@ const AdminCat = () => {
               <button
                 className="bg-white hover:bg-red text-black rounded w-20 h-9 my-5"
                 onClick={() => {
-                  deleteCateg(el.CategoryID);
+                  setShowConf(!showConf);setId(el.CategoryID)
                 }}
               >
                 delete
@@ -129,6 +147,8 @@ const AdminCat = () => {
                     >
                       Validate
                     </button>
+                
+
                   </div>
                 )}
               </div>

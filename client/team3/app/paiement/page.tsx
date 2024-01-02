@@ -1,5 +1,5 @@
 import React from 'react'
-import Footer from '../Footer/page'
+
 import Navbar from '../Nav/page'
 import { FcCheckmark } from "react-icons/fc";
 import { VscChromeClose } from "react-icons/vsc";
@@ -47,7 +47,7 @@ function Paiment() {
       
 
     </div>
-    <Footer/>
+    
     </>
   )
 

@@ -19,7 +19,10 @@ import { HiOutlineComputerDesktop } from 'react-icons/hi2';
 import { SiYoutubegaming } from 'react-icons/si';
 import Image from 'next/image';
 import img from "../Image/high.png"
+import { log } from "console";
+import { useCartStore } from "../stores/CartStore";
 const Home: React.FC = () => {
+  const cartStore = useCartStore();
   const [products, setProducts] = useState<any[]>([]);
   const [showAddToCart, setShowAddToCart] = useState<boolean>(false);
   const [index, setIndex] = useState<number>(-1);
@@ -28,7 +31,8 @@ const Home: React.FC = () => {
   const [change, setChange] = useState(false);
   const [index1, setIndex1] = useState(1);
   const [best,setBest]=useState([]);
-  const router = useRouter();
+  const userId = localStorage.getItem('userId');
+   const router = useRouter();
   useEffect(() => {
     axios.get(`http://localhost:3000/api/products/allProducts`)
       .then(r => {
@@ -45,11 +49,22 @@ const Home: React.FC = () => {
   }, []);
 
   const addCart = (obj: object) => {
+    cartStore.setCart([...cartStore.cart, obj]);
     axios.post("http://localhost:3000/api/cart/addCart", obj)
       .then((res) => { console.log(res); })
       .catch((err) => console.log(err));
   };
-
+const addWished=(wished:any)=>{
+  console.log("add to wishlist working fine!")
+const toWishlist={
+  NameWish:wished.Name,
+  WishPrice:wished.Price,
+  userUserID:userId
+}
+axios.post("http://localhost:3000/api/wish/addwish",toWishlist).then((result)=>{
+  console.log(result.data)
+}).catch((err)=>{console.log(err.message)})
+}
   return(
     <>
 <Nav/>
@@ -106,45 +121,45 @@ const Home: React.FC = () => {
     
     </div>
     <div style={{}}  id="div-div" className='flex gap-7 overflow-auto'>
-      {flash.map((el,f)=>(
+      {flash.map((el,i)=>(
         <div  >
-        <div >
-         
-           
-         <div  className='w-80 h-80 bg-gray flex justify-center items-center mt-10'
-            onMouseEnter={()=>{setShowAddToCart(!showAddToCart)
-                                setIndex(f)
-                              }}
-           onMouseLeave={()=>{setShowAddToCart(!showAddToCart)
-                              setIndex(-1)}}>
-                                <div>
-                               
-              <div style={{    'margin-left': '-40%'}} className=' top-full left-0 w-20 rounded h-8 bg-red-500 flex justify-center items-center text-white'>-{el.Discount}%</div>
-              <div style={{'margin-left': '117%',
-          'margin-top': '-30%'}}>
-              <div className='bg-white w-12 h-12 rounded-full flex items-center justify-center'><FaRegHeart size={20}/></div> 
-              <div className='bg-white w-12 h-12 rounded-full flex items-center justify-center'><MdOutlineRemoveRedEye onClick={()=>{flash.splice(f,1)}} size={20}/></div>
-              </div>
-              <Link href={`/ProductDetails/${el.ProductID}`} ><img className=' w-40' src={el.ProductImage[0]?el.ProductImage[0]:el.ProductImage} alt="" onClick={()=>{
+        <div className='w-80 h-72 bg-gray mt-10 flex-wrap'
+          onMouseEnter={()=>{setShowAddToCart(!showAddToCart)
+            setIndex(i)}}
+          onMouseLeave={()=>{setShowAddToCart(!showAddToCart)
+          setIndex(-1)}}>
+          <div className=' top-full left-0 w-20 rounded h-8 bg-red flex justify-center items-center text-black '>-{el.Discount}%</div>
+          <div className='bg-white w-12 h-12 rounded-full flex items-center justify-center float-right'><FaRegHeart onClick={()=>{addWished(el)}}size={20}/> </div>
+          <div className='bg-white w-12 h-12 rounded-full flex items-center justify-center float-right'><MdOutlineRemoveRedEye size={20}/></div>
+          {index === i && showAddToCart && (
+          <button
+            className="cursor-pointer w-80 h-11 bg-black text-white flex justify-center items-center absolute mt-56"
+            onClick={() =>{
+              addCart({
+                NameCart: el.Name,
+                CartImage: el.ProductImage,
+                Price: el.Price,
+                Quantity: el.Quantity,
+                userUserID: userId,
+              })
+            }}
+          >
+            Add To Cart
+          </button>
+        )}          <Link href={`/ProductDetails/${el.ProductID}`} ><img className=' w-40' src={el.ProductImage[0]?el.ProductImage[0]:el.ProductImage} alt="" onClick={()=>{
             }} /></Link>
-               </div>
-               {index===f&&showAddToCart&&<div onClick={() => {
-                addCart({NameCart:el.Name,CartImage:el.ProductImage,Price:el.Price,Quantity:el.Quantity,userUserID:1})}}
-                style={{'top': '140%'}} className='cursor-pointer w-80 h-11 bg-black text-white flex justify-center items-center absolute'>Add To Cart</div>}
-                  </div>
             
-            <h1>{el.Name}</h1>
-            <div className='flex gap-4'>
-            <h1 className='text-red'>{el.Price}DT</h1><h1 className='text-gray-300 line-through	'>$9720</h1>
-            </div>
-            </div>
-          
+          </div>
+          <h1>{el.Name}</h1>
+         <div className='flex gap-4'>
+         <h1 className='text-red'>${el.Price}</h1><h1 className='text-gray-300 line-through	'>{(el.Price / (1 - el.Discount/ 100)).toFixed(2)}</h1>
+         </div>
    
          </div>
                 ))}
                  </div>
                  <div style={{'margin-left':'40%','margin-bottom':'10%'}} className='flex justify-center items-center w-80 h-16 bg-red mt-16 '>
-         <Link href='/Product' > <h1 onClick={()=>{}} className='text-white cursor-pointer' > View All Products</h1>   </Link>
+         <Link href='/Product' > <h1 onClick={()=>{}} className='text-white cursor-pointer' > View el Products</h1>   </Link>
         </div>
       <hr className='w-5/6 ml-20 text-gray-300 mb-32'/>
     </div>
@@ -240,10 +255,10 @@ const Home: React.FC = () => {
           <h1 className="text-5xl font-medium mt-10">Best Selling Products</h1>
           <button
             onClick={() => {
-              router.push('/AllProducts');
-              setRefresh(!refresh);
+              router.push('/Product');
+              
             }}
-            className="absolute right-60 mt-8 text-white bg-red w-32 h-12"
+            className="absolute right-60 mt-8 text-red  w-32 h-12"
           >
             View All
           </button>
