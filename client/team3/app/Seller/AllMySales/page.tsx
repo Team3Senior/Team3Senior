@@ -7,11 +7,10 @@ import { FaRegHeart } from "react-icons/fa6";
 import { setRef } from '@mui/material';
 import { IoSearchOutline } from "react-icons/io5";
 import DeleteIcon from "@mui/icons-material/Delete";
-const userId = localStorage.getItem('userId');
 interface Product {
   id: string;
   ProductID: string;
-  ProductImage: string[];
+  ProductImage: string;
   Name: string;
   Description: string;
   Price: number;
@@ -25,24 +24,24 @@ interface Product {
 
 
 
-const AllmySales: React.FC<Product> = () => {
+const AllmySales: React.FC<Product> = ({ userID }) => {
   const [allSales, setAllSales] = useState<Product[]>([]);
   const [refresh, setRefresh] = useState(false);
   const [show, setShow] = useState<string | null>(null);
-  const [name, setName] = useState('');
-  const [description, setDescription] = useState('');
-  const [quantity, setQuantity] = useState(0);
-  const [price, setPrice] = useState(0);
-  const [availability, setAvailability] = useState('');
-  const [discount, setDiscount] = useState(0);
-  const [color, setColor] = useState('');
-  const [size, setSize] = useState('');
+  const [name, setName] = useState<string>('');
+  const [description, setDescription] = useState<string>('');
+  const [quantity, setQuantity] = useState<number>(0);
+  const [price, setPrice] = useState<number>(0);
+  const [availability, setAvailability] = useState<string>('');
+  const [discount, setDiscount] = useState<number>(0);
+  const [color, setColor] = useState<string>('');
+  const [size, setSize] = useState<string>('');
 
- 
+  console.log('monji', userID);
 
   const fetchData = async () => {
     try {
-      const res = await fetch(`http://localhost:3000/api/products/prodsOfUser/${userId}`);
+      const res = await fetch(`http://localhost:3000/api/products/prodsOfUser/2`);
       const data = await res.json();
       setAllSales(data);
 
@@ -56,7 +55,7 @@ const AllmySales: React.FC<Product> = () => {
 
 
 
-  const updated = {
+  const updated : any = {
     Name: name,
     Description: description,
     Price: price,
@@ -71,7 +70,7 @@ const AllmySales: React.FC<Product> = () => {
 
 
  
-  const deleteProd = async (productID: string) => {
+  const deleteProd = async (productID: number) => {
     try {
       await fetch(
         `http://localhost:3000/api/products/deleteProd/${productID}`,
@@ -86,10 +85,14 @@ const AllmySales: React.FC<Product> = () => {
   };
 
 
-  const updateProd = async (id: string) => {
+  const updateProd = async (id: number,prod : Product) => {
     try {
       await fetch(`http://localhost:3000/api/products/updateProd/${id}`, {
         method: "PUT",
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(prod),
       });
       setRefresh(!refresh);
     } catch (err) {
@@ -104,10 +107,10 @@ const AllmySales: React.FC<Product> = () => {
           <h3 className='text-'>Make Discount on your sales and win Gold Coupon </h3>
         </div>
         <div className='flex justify-center gap-8 mt-11 mb-6'>
-          <Link href={'/seller'}>Home</Link>
-          <Link href={'/contactAdmin'}>Contact Administration</Link>
-          <Link href={'/addforsale'}>Add For Sale</Link>
-          <Link href={'/allmysales'}>All My Sales </Link>
+          <Link href={'/Seller'}>Home</Link>
+          <Link href={'/ContactAdmin'}>Contact Administration</Link>
+          <Link href={'/Addforsale'}>Add For Sale</Link>
+          <Link href={'/Allmysales'}>All My Sales </Link>
 
           <div className='w-auto h-8 flex float-right gap-16 absolute right-10 top-20'>
             <CgProfile size={25} />
@@ -126,7 +129,7 @@ const AllmySales: React.FC<Product> = () => {
               {el.ProductImage[0]}
               <div className='w-80 h-72 bg-gray mt-10 flex-wrap'>
                 {el.Discount ? <div className=' top-full left-0 w-20 rounded h-8 bg-red flex justify-center items-center text-white '>-{el.Discount}%</div> : ''}
-                <img className=' w-50 h-52 ml-16 ' src={el.ProductImage[0]} alt="" />
+                <img className=' w-50 h-52 ml-16 ' src={el.ProductImage} alt="" />
 
                 <div>{el.Availability === 'In Stock' ? <h1 className=' font-semibold text-lime-600 my-3' style={{ 'color': 'green' }}> In Stock </h1> : <h1 className='text-red'> Out of Stock </h1>}</div>
 
@@ -137,7 +140,7 @@ const AllmySales: React.FC<Product> = () => {
 
               </div>
               <button className="hover:shadow-lg hover:text-red px-6 py-3 mb-1 mr-1 text-sm font-bold text-black bg-white uppercase rounded shadow "
-                type="button" onClick={() => { deleteProd(el.ProductID) }}> Delete </button>
+                type="button" onClick={() => { deleteProd(Number(el.ProductID)) }}> Delete </button>
               <button className="hover:shadow-lg hover:text-red px-6 py-3 mb-1 mr-1 text-sm font-bold text-black bg-white uppercase rounded shadow "
                 type="button" onClick={() => { setShow(show === el.ProductID ? null : el.ProductID) }}> Update</button>
               <div>{show === el.ProductID &&
@@ -217,7 +220,7 @@ const AllmySales: React.FC<Product> = () => {
                     />
                   </div>
                   <button className='hover:shadow-lg hover:bg-white px-6 py-3 mb-1 mr-1 text-sm font-bold text-black bg-red uppercase rounded shadow'
-                    onClick={() => { updateProd(el.ProductID); setShow(null) }}> Validate </button>
+                    onClick={() => { updateProd(Number(el.ProductID), updated); setShow(null) }}> Validate </button>
                 </div>
               }</div>
             </div>

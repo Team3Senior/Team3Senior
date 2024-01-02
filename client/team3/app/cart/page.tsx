@@ -1,20 +1,18 @@
 "use client"
 
 import React, { useState, useEffect } from 'react';
-import Footer from '../../Footer/page';
-import Navbar from '../../Nav/page';
+import Footer from '../Footer/page';
+import Navbar from '../Nav/page';
 import axios from 'axios';
 import { MdDelete } from "react-icons/md";
 import { useRouter} from 'next/navigation';
-import {useParams} from 'next/navigation';
 
 
 
 function Cart() {
-  const params=useParams<{UserId:string}>()
+  const userId = localStorage.getItem('userId');
   const [cartData, setCartData] =  useState<[]>([]);
   const [refresh,setRefresh] = useState<boolean>(true);
-  //const [confirmdelete,setConfirmdelete] =useState<boolean>(false);
   const router=useRouter()
 const navigate=(path:string)=>{
 router.push(path)
@@ -36,7 +34,7 @@ router.push(path)
   
 
   useEffect(() => {
-    axios.get(`http://localhost:3000/api/cart/UserCart/${parseInt(params.UserId)}`)
+    axios.get(`http://localhost:3000/api/cart/UserCart/${userId}`)
       .then((response) => {
         console.log('houss', response.data);
         setCartData(response.data);
@@ -66,7 +64,7 @@ router.push(path)
         {cartData.map((item:any, i) => (
           <div key={i} className='grid grid-cols-4 mt-10 shadow items-center h-14 w-5/6 ' style={{'display':'flex','justifyContent':'space-around'}}>
            
-            <h1 className='ml-10'> {item.NameCart} </h1>
+            <img className='w-10 ml-10' src={item.CartImage[0]} alt="no-content" />
             <h1 className='ml-10'>{item.Price}</h1>
             <input
               className='w-10 ml-10 border-gray-300 border rounded'
@@ -83,7 +81,6 @@ router.push(path)
             />
             <h1 className='ml-20'>{calculateSubtotal(item.quantity || 1, item.Price)}$</h1>
             <MdDelete className='ml-10 cursor-pointer'  onClick={() => { deleteC(item.CartID)}}/>
-           
             
           </div>
           

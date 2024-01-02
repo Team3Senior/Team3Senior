@@ -1,20 +1,35 @@
 "use client"
-import { useState } from 'react';
+import { useState ,useEffect} from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { IoSearchOutline } from 'react-icons/io5';
 import { FaRegHeart } from 'react-icons/fa';
 import { AiOutlineShoppingCart } from 'react-icons/ai';
 import { CgProfile } from 'react-icons/cg';
+import Logout from '../Logout';
+import axios from 'axios';
+import { useCartStore } from '../stores/CartStore';
+
 
 const Nav: React.FC = (props:{}) => {
   const router = useRouter()
   console.log(router);
-  
+  const userId = localStorage.getItem('userId');
+  const [cartData, setCartData] =  useState<[]>([]);
   const [searchValue, setSearchValue] = useState<String>('');
   const [showAccount, setShowAccount] = useState<boolean>(false);
+  const [counter, setCounter] = useState<number>(cartData.length); 
+  const cartStore = useCartStore();
+  useEffect(() => {
+    axios.get(`http://localhost:3000/api/cart/UserCart/${userId}`)
+      .then((response) => {
+        console.log('houss', response.data);
+        setCartData(response.data);
+       
+      })
+      .catch((error) => console.log(error));
+  }, [])
   
-
   const handleSearch = () => {
     console.log('Search value:', searchValue);
     router.push('/AllProducts');
@@ -56,17 +71,21 @@ const Nav: React.FC = (props:{}) => {
               size={25}
               className='cursor-pointer'
             />
-            <FaRegHeart  onClick={() => navigateTo('/wishlist/2')}  size={25} />
-            <div className='w-5 h-5 bg-red-500 rounded-full flex justify-center items-center text-white'>
-             
+            <FaRegHeart  onClick={() => navigateTo('/wishlist')}  size={25} />
+            <div className='w-5 h-5  bg-red-500 rounded-full  flex justify-center items-center text-white'>
+              {cartStore.cart.length}
             </div>
             <AiOutlineShoppingCart
               className='cursor-pointer'
               size={25}
-              onClick={() => navigateTo('/cart/2')}
-            />
-            <CgProfile size={25} onClick={() => setShowAccount(!showAccount)} />
-             {/*showAccount && <AccountDropDown />*/}  
+              onClick={() => navigateTo('/cart')}
+            /><div className="userDropdown">
+             {userId ? <img className="w-12 h-10 relative right-[-10px]" src="https://images-ext-1.discordapp.net/external/XjoCJLwMNJQrMq0DTYawsY9vY5xN64W8eyoIOoLqT1k/https/cdn-icons-png.flaticon.com/512/149/149071.png?format=webp&quality=lossless&width=581&height=581" alt=""/> : "" } 
+            {/* {showAccount && <AccountDropDown />}  */}
+            </div>
+            
+            <Logout/>
+            
           </div>
         </div>
       </nav>

@@ -15,10 +15,11 @@ const EditProfile   = (props:{login:{user:{FirstName:string}}}) => {
     const[address,setAdress]=useState<string>("")
     const[password,setPasword]=useState<string>("")
     const[confPass,setConfPass]=useState<string>("")
+    const userId = localStorage.getItem('userId');
     const navigate =(path:string)=>{
         router.push(path)
     }
-const update=(id:number)=>{
+const update=()=>{
 const updateUser:{}={
     FirstName:fn,
     LastName:ln,
@@ -26,7 +27,7 @@ const updateUser:{}={
     adress:address,
     Email:email
 }
-      axios.put(`http://localhost:3000/api/users/edit/${id}`,updateUser).then((result)=>{
+      axios.put(`http://localhost:3000/api/users/edit/${userId}`,updateUser).then((result)=>{
         console.log(result.data)
       }).catch((error):any=>{
         console.log(error.message)
@@ -104,7 +105,7 @@ const updateUser:{}={
                         </div>
                         <div className='mt-10' style={{'margin-left': '57%;'}}>
                         <button className='text-black  bg-white mr-8 ' onClick={()=>navigate('/')}>Cancel</button>
-                        <button className='text-white w-44 h-14 bg-black rounded' onClick={()=>update(1)}>Save Changes</button>
+                        <button className='text-white w-44 h-14 bg-black rounded' onClick={()=>update()}>Save Changes</button>
                         </div>
                 
                 </div>
